@@ -1,0 +1,35 @@
+
+/*
+Nav bar padding fix
+http://getbootstrap.com/components/#navbar-fixed-top
+*/
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: #3b2f32;
+    color: #FFFFFF
+}
+
+.navbar {
+    background-color: #1e1a1b;
+    border: 1px solid #3b2f32;
+}
+
+.tab:hover {
+    background-color: #3b2f32;
+}
+
+.active.tab {
+    background-color: #3b2f32;
+}
+
+#bottomBar {
+    padding-top: 10px;
+}
+
+/*
+Make gliphicons larger
+*/
+span.glyphicon {
+    font-size: 3.0em;
+}
