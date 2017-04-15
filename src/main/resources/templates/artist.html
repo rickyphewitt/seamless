@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+      <!-- ============================================================================ -->
+      <!-- This content is only used for static prototyping purposes (natural templates)-->
+      <!-- and is therefore entirely optional, as this markup fragment will be included -->
+      <!-- from "fragments/header.html" at runtime.                                     -->
+      <!-- ============================================================================ -->
+<head lang="en" th:include="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <link href="../static/css/custom.css"
+          th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+    <div id="mainContainer" class="container-fluid">
+        <nav th:fragment="nav" id="topBar" class="row navbar navbar-fixed-top">
+            <div id="artistTab" class="col-sm-2 tab">
+                <h2>Artists</h2>
+            </div>
+            <div id="albumTab" class="col-sm-2 active tab">
+                <h2>Albums</h2>
+            </div>
+            <div id="genreTab" class="col-sm-2 tab">
+                <h2>Generes</h2>
+            </div>
+            <div id="playlistTab" class="col-sm-2 tab">
+                <h2>Playlists</h2>
+            </div>
+            <div id="favoritsTab" class="col-sm-2 tab">
+                <h2>Favorites</h2>
+            </div>
+            <div id="recentTab" class="col-sm-1 tab">
+                <h2>Recent</h2>
+            </div>
+            <div id="settings" class="col-sm-1 tab">
+                <h2>Settings</h2>
+            </div>
+        </nav>
+        <div th:include="fragments/albums :: albums" id="midContentArtist" class="row">
+            <div class="col-md-2">
+                <h2>A</h2>
+                <ul>
+                    <a href="test"><li>Alesana</li></a>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+                <h2>B</h2>
+                <ul>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h2>C</h2>
+                <ul>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                </ul>
+                <h2>E</h2>
+                <ul>
+                    <li>Esdkdsjdfs</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+                <h2>B</h2>
+                <ul>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                    <li>broadway</li>
+                    <li>Boonster</li>
+                </ul>
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h2>C</h2>
+                <ul>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                </ul>
+                <h2>E</h2>
+                <ul>
+                    <li>Esdkdsjdfs</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+            </div>
+                        <div class="col-md-2">
+                <h2>C</h2>
+                <ul>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                </ul>
+                <h2>E</h2>
+                <ul>
+                    <li>Esdkdsjdfs</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+            </div>
+                        <div class="col-md-2">
+                <h2>C</h2>
+                <ul>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                    <li>Csdfdsfsdf</li>
+                </ul>
+                <h2>E</h2>
+                <ul>
+                    <li>Esdkdsjdfs</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>F</h2>
+                <ul>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                    <li>Foo Fighters</li>
+                </ul>
+                <h2>A</h2>
+                <ul>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                    <li>Alesana</li>
+                    <li>Anberlin</li>
+                </ul>
+            </div>
+        </div>
+        <nav th:fragment="nav" id="bottomBar" class="row navbar navbar-fixed-bottom">
+            <div class="col-md-4 center-block">
+                <p class="text-center">
+                    Song Name <br />
+                    Artist Name <br />
+                    Album Name <br />
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="text-center glyphicon glyphicon-step-backward"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-center glyphicon glyphicon-play"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-center glyphicon glyphicon-step-forward"></span>
+                    </div>
+            </div>
+            </div>
+            <div class="col-md-2">
+                    <span class="text-center glyphicon glyphicon-volume-up"></span>
+            </div>
+            <div class="col-md-1">
+                    <span class="text-center favorite glyphicon glyphicon-heart-empty"></span>
+            </div>
+            <div class="col-md-1">
+                    <span class="text-center glyphicon glyphicon-list"></span>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="albums" id="innerContent" class="row">
+            <div class="col-lg-12">
+            
+                <h2>Albums</h2>
+                <ul>
+                	<th:block th:each="album : ${albums}">
+                	<span class="albumPlay" data-th-attr="albumId=${album.id}" th:id="${album.id}"> Play </span>
+                    <a th:href="@{/albums/{id}/(id=${album.id})}" href="/albums/albumKey">
+                    	<li th:text="${album.name}">
+                    	Alesana
+                   		</li>
+                   	</a>
+                	</th:block>
+                </ul>
+                
+            </div>
+            <script th:inline="javascript">
+            /*<![CDATA[*/ 
+            function playAlbum(albumId) {
+            	console.log(albumId);
+				url="/play/album/" + albumId;
+				$("#player").attr("src", url);
+            }
+            
+            
+            $(function() {                       //run when the DOM is ready
+            	  $(".albumPlay").click(function() {  //use a class, since your ID gets mangled
+            		  playAlbum($(this).attr('albumId'));     //add the class to the clicked element
+            	  });
+            	});
+            
+            /*]]>*/
+            </script>
+        </div>
+</body>
+</html>

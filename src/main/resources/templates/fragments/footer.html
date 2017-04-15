@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<nav th:fragment="footer" id="bottomBar" class="row navbar navbar-fixed-bottom">
+             <audio id="player" src="/play/68780f4b9e04bead20bf98ad5e76a376" controls="controls" autoplay="autoplay"></audio>
+            <div class="col-md-4 center-block">
+                <p class="text-center">
+                    <span id="playingSongName">Song Name</span> <br />
+                    Artist Name <br />
+                    Album Name <br />
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span id="prev" class="text-center glyphicon glyphicon-step-backward"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span id="play" class="text-center glyphicon glyphicon-play"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span id="next" class="text-center glyphicon glyphicon-step-forward"></span>
+                    </div>
+            </div>
+            </div>
+            <div class="col-md-2">
+                    <span class="text-center glyphicon glyphicon-volume-up"></span>
+            </div>
+            <div class="col-md-1">
+                    <span class="text-center favorite glyphicon glyphicon-heart-empty"></span>
+            </div>
+            <div class="col-md-1">
+                    <span id="nowPlayingQueue" class="text-center glyphicon glyphicon-list"></span>
+            </div>
+      	<script th:src="@{/js/nav.js}" src="../static/js/nav.js"></script>
+    	<script th:src="@{/js/player.js}" src="../static/js/player.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+				 
+
+            
+/*             script type="text/javascript">
+            document.getElementById('player').addEventListener("ended",function() {
+                $()
+            	this.src = "song.php?nocache="+new Date().getTime();
+                this.play();
+            }); */
+        
+            
+            /*]]>*/
+            </script>
+        
+        </nav>
+</body>
+</html>

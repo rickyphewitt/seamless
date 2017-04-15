@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="artists" id="innerContent" class="row">
+             	<div id="test"></div>
+                <th:block th:each="artistKey : ${sortedArtistKeys}">
+                <h2 th:text="${artistKey}">A</h2>
+                <ul>
+                	<th:block th:each="artist : ${sortedArtistMap.get(artistKey)}">
+                    <!-- <a th:href="@{/artists/{id}/(id=${artist.id})}" href="/artists/artistId"> -->
+                    	<li class="artist" id="attistIdHere" th:id="${artist.id}" th:text="${artist.name}">
+                    	Alesana
+                   		</li>
+                   	<!-- </a> -->
+                	</th:block>
+                </ul>
+                </th:block>
+             <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            function gotToArtist(artist) {
+            	console.log(artist.attr('id'));
+				url="/artists/" + artist.attr('id');
+				console.log(url)
+	            $("#innerContent").load(url);   
+            }
+            
+            $(function() {                       //run when the DOM is ready
+            	  $(".artist").click(function() {  //use a class, since your ID gets mangled
+            		  gotToArtist($(this));     //add the class to the clicked element
+            	  });
+            	});
+            
+            /*]]>*/
+            </script>
+            </div>
+</body>
+</html>
