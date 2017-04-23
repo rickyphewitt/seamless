@@ -1,4 +1,4 @@
-package com.rickyphewitt.emby.mini.music.controllers;
+package com.rickyphewitt.emby.mini.music.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,23 +7,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rickyphewitt.emby.api.data.AlbumSet;
+import com.rickyphewitt.emby.api.data.Artist;
+import com.rickyphewitt.emby.mini.music.services.AlbumService;
+import com.rickyphewitt.emby.mini.music.services.ArtistService;
 import com.rickyphewitt.emby.mini.music.services.DisplayOrganizerService;
+import com.rickyphewitt.emby.mini.music.services.FragmentService;
 import com.rickyphewitt.emby.mini.music.services.LoginService;
 
 @Controller
-public class ArtistController {
+public class AlbumController {
+
+	@Autowired
+	ArtistService artistService;
+	
+	@Autowired
+	AlbumService albumService;
+	
 	@Autowired
 	LoginService loginService;
 	
 	@Autowired
 	DisplayOrganizerService displayOrganizerService;
 	
+	@Autowired 
+	FragmentService fragmentService;
 	
-	@RequestMapping("/artists/{id}")
-	public String artist(@PathVariable("id") String id, Model model) {
-		//loginService.login();
-		AlbumSet albums = loginService.getAlbumsByArtist(id);
-		model.addAttribute("albums", albums.getItems());
-		return "artist";
+	@RequestMapping("/albums")
+	public String artist(Model model) {
+		
+		return fragmentService.getFragment("albums");
 	}
 }

@@ -17,29 +17,26 @@
 <body>
     <div id="mainContainer" class="container-fluid">
         <nav th:fragment="nav" id="topBar" class="row navbar navbar-fixed-top">
-            <div id="artistTab" class="col-sm-2 active tab">
+            <div id="artistsTab" class="col-sm-2 active tab">
                 <h2>Artists</h2>
             </div>
-            <div id="albumTab" class="col-sm-2 tab">
+            <div id="albumsTab" class="col-sm-2 tab">
                 <h2>Albums</h2>
             </div>
-            <div id="genreTab" class="col-sm-2 tab">
-                <h2>Generes</h2>
+            <div id="genresTab" class="col-sm-2 tab">
+                <h2>Genres</h2>
             </div>
-            <div id="playlistTab" class="col-sm-2 tab">
+            <div id="playlistsTab" class="col-sm-2 tab">
                 <h2>Playlists</h2>
             </div>
-            <div id="favoritsTab" class="col-sm-2 tab">
+            <div id="favoritesTab" class="col-sm-2 tab">
                 <h2>Favorites</h2>
             </div>
-            <div id="recentTab" class="col-sm-1 tab">
-                <h2>Recent</h2>
-            </div>
-            <div id="settings" class="col-sm-1 tab">
+            <div id="settingsTab" class="col-sm-2 tab">
                 <h2>Settings</h2>
             </div>
         </nav>
-        <div th:include="fragments/artists :: artists" id="innerContent" class="row">
+        <div th:include="${#strings.concat('fragments/', innerContent)} :: ${innerContent}" id="innerContent" class="row artistsAll">
             <div class="col-md-2">
                 <h2>A</h2>
                 <ul>

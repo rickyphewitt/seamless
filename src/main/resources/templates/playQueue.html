@@ -6,9 +6,9 @@
             
                 <h2>Now Playing Queue</h2>
                 <table class="table">
-	                	<tr th:each="queueSong : ${queue}">
-	                		<td class="playQueueSong" data-th-attr="songId=${queueSong.id}" th:text="${queueSong.trackNumber}">1</td>
-	                		<td class="playQueueSong" data-th-attr="songId=${queueSong.id}" th:text="${queueSong.name}">BatCountry</td>
+	                	<tr th:each="queueSong : ${queue}" class="nowPlayingQueueItem">
+	                		<td th:text="${queueSong.trackNumber}">1</td>
+	                		<td th:id="${queueSong.id}" class="playQueueSong" data-th-attr="songId=${queueSong.id}" th:text="${queueSong.name}">BatCountry</td>
 	                		<td th:text="${queueSong.container}">City of Evil</td>
 	                		<td th:text="${queueSong.runTimeTicks}">Avenged Sevenfold</td>
 	                	</tr>	
@@ -18,28 +18,6 @@
             <script th:inline="javascript">
             /*<![CDATA[*/
 				 
-            function playSong(songId) {
-            	console.log(songId);
-				url="/play/queue/song/" + songId;
-				$("#player").attr("src", url);
-            }
-            
-            
-            $(function() {                       //run when the DOM is ready
-            	  $(".playQueueSong").click(function() {  //use a class, since your ID gets mangled
-            		  playSong($(this).attr('songId'));     //add the class to the clicked element
-            	  });
-            	});
-            
-            
-/*             script type="text/javascript">
-            document.getElementById('player').addEventListener("ended",function() {
-                $()
-            	this.src = "song.php?nocache="+new Date().getTime();
-                this.play();
-            }); */
-        
-            
             /*]]>*/
             </script>
         </div>

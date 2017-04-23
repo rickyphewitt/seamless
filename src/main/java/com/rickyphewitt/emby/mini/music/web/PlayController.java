@@ -42,4 +42,9 @@ public class PlayController {
 		return playQueueService.getPlayQueue().get(playQueueService.getCurrentIndex()).getId();
 	}
 	
+	@RequestMapping(value="/play/queue/playing", produces = MediaType.ALL_VALUE)
+	public  @ResponseBody String getQueuePlaying() {
+		return playQueueService.getPlayQueue().get(playQueueService.getCurrentIndex()).getId();
+	}
+	
 }

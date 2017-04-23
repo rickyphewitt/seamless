@@ -1,4 +1,4 @@
-package com.rickyphewitt.emby.mini.music.controllers;
+package com.rickyphewitt.emby.mini.music.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -23,6 +23,15 @@ body {
     background-color: #3b2f32;
 }
 
+#innerContent.artistsAll {
+    -webkit-column-count: 8;
+    -moz-column-count: 8;
+    column-count: 8;
+    -webkit-column-gap: 5px;
+    -moz-column-gap: 5px;
+    column-gap: 5px;
+}
+
 #bottomBar {
     padding-top: 10px;
 }

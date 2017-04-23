@@ -17,19 +17,6 @@
                 </th:block>
              <script th:inline="javascript">
             /*<![CDATA[*/
-
-            function gotToArtist(artist) {
-            	console.log(artist.attr('id'));
-				url="/artists/" + artist.attr('id');
-				console.log(url)
-	            $("#innerContent").load(url);   
-            }
-            
-            $(function() {                       //run when the DOM is ready
-            	  $(".artist").click(function() {  //use a class, since your ID gets mangled
-            		  gotToArtist($(this));     //add the class to the clicked element
-            	  });
-            	});
             
             /*]]>*/
             </script>

@@ -4,14 +4,81 @@
 */
 
 /* Global Vars */
+/* Urls */
+var homeUrl = "/home"
+var artistsUrl = "/artists";
+var albumsUrl = "/albums"
+var genresUrl = "/genres"
+var playlistsUrl = "/playlists"
+var favoritesUrl = "/favorites"
+var settingsUrl = "/settings"
+var nowPlayingQueueUrl = "/queue";
+//attributes
+var artistIdAttr = "id";
+//css ids
+var artistsTab = "#artistsTab";
+var albumsTab = "#albumsTab";
+var genresTab = "#genresTab";
+var playlistsTab = "#playlistsTab";
+var favoritesTab = "#favoritesTab";
+var settingsTab = "#settingsTab";
 var innerContentDiv = "#innerContent";
 var nowPlayingQueueId = "#nowPlayingQueue";
-var nowPlayingQueueUrl = "/queue";
+
+// css classes
+var artistClass = "artist";
+var artistsAllClass = "artistsAll";
+// fully qualified css classes
+var artistClassFQ = "." + artistClass;
+
+/* Top Nav */
+function navGoTo(location) {
+	$(innerContentDiv).load(location);
+}
+
+/* Artist Nav */
+function gotToArtist(artist) {
+    $(innerContentDiv).toggleClass(artistsAllClass);
+	$(innerContentDiv).load(artistsUrl +"/"+ artist.attr(artistIdAttr));
+    
+}
 
 /* Footer Nav */
 
-// open now playing queue
-$(nowPlayingQueueId).click(function(){
-	$(innerContentDiv).load(nowPlayingQueueUrl);
+
+/* DOM Ready Loading done here */
+$(function() {
+	// onclick nav events
+	$(artistsTab).click(function(){
+		navGoTo(homeUrl);
+	})
+	$(albumsTab).click(function(){
+		navGoTo(albumsUrl);
+	})
+	$(genresTab).click(function(){
+		navGoTo(genresUrl);
+	})
+	$(playlistsTab).click(function(){
+		navGoTo(playlistsUrl);
+	})
+	$(favoritesTab).click(function(){
+		navGoTo(favoritesUrl);
+	})
+	$(settingsTab).click(function(){
+		navGoTo(settingsUrl);
+	})
+	
+	// opens now playing queue
+	$(nowPlayingQueueId).click(function(){
+		$(innerContentDiv).load(nowPlayingQueueUrl, function(){
+			loadQueueJs();
+		});
+	});
+	
+	// adds click to artists
+	 $(artistClassFQ).click(function() {  //use a class, since your ID gets mangled
+		  gotToArtist($(this));     //add the class to the clicked element
+	  });
+
 });
 

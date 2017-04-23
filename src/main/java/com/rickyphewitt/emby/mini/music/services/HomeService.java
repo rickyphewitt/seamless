@@ -21,18 +21,26 @@ public class HomeService {
 	LoginService loginService;
 	
 	@Autowired
+	ArtistService artistService;
+	
+	@Autowired
 	DisplayOrganizerService displayOrganizerService;
 	
 	@Autowired
 	ColumnDisplayService columnDisplayService;
 	
+	@Autowired
+	FragmentService fragmentService;
+	
 	public String home(Model model, HttpServletResponse response) {
 		
 		// Log into emby server
 		loginService.login();
-//	
+		
 		// get all artists
-		ArtistSet artists = loginService.getArtists();
+		artistService.loadArtists();
+		
+		ArtistSet artists = artistService.getArtistSet();
 		Assert.assertTrue(artists.getItems().size() > 0);
 		
 		HashMap<String, ArrayList<Item>> sortedArtists = displayOrganizerService.organizeItems(artists.getItems());
@@ -44,47 +52,10 @@ public class HomeService {
 		
 		
 		
-//		
-//		// get albums by artist
-//		AlbumSet albums = loginService.getAlbumsByArtist(artists.getItems().get(0).getId());
-//		Assert.assertTrue(albums.getItems().size() > 0);
-//		
-//		// get songs by album
-//		SongSet songs = loginService.getSongsFromAlbum(albums.getItems().get(0).getId());
-//		Assert.assertTrue(songs.getItems().size() > 0);
-//		
-//		// get single song
-//		byte[] songFile = loginService.getSong(songs.getItems().get(0).getId());
-//		Assert.assertNotNull(songFile);
-		
-		
-//		
-//		 try {
-//	            
-////			 	File file = new File(System.getenv("OPENSHIFT_DATA_DIR")+"audio.m4a");
-////	            InputStream input = new FileInputStream(file);
-//
-//	            response.setContentLength((int) songFile.length);
-//	            System.out.println("JAVA: (int) file.length()==> "+(int) songFile.length);
-//	            response.setContentType("audio/mp3");
-//	            //System.out.println("JAVA: new MimetypesFileTypeMap().getContentType(file)==> "+new MimetypesFileTypeMap().getContentType(file));
-//
-//	            OutputStream output = response.getOutputStream();
-//	           // byte[] bytes = new byte[BUFFER_LENGTH];
-//	            //int read = 0;
-//	            //while ((read = input.read(songFile, 0, 1)) != -1) {
-//	                output.write(songFile);
-//	                output.flush();
-//	            //}
-//
-//	            //input.close();
-//	            output.close();
-//
-//	        } catch (Exception e) {
-//	            e.printStackTrace(System.out);
-//	        }
+
 		model.addAttribute("sortedArtistKeys", displayOrganizerService.getSortedKeys());
 		model.addAttribute("sortedArtistMap", sortedArtists);
+		model.addAttribute("innerContent", "artists");
 		return "home";
 	}
 	
