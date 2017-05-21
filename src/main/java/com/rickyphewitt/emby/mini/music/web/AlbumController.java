@@ -6,13 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rickyphewitt.emby.api.data.AlbumSet;
-import com.rickyphewitt.emby.api.data.Artist;
+import com.rickyphewitt.emby.api.data.Album;
+import com.rickyphewitt.emby.api.data.SongSet;
 import com.rickyphewitt.emby.mini.music.services.AlbumService;
+import com.rickyphewitt.emby.mini.music.services.ApiService;
 import com.rickyphewitt.emby.mini.music.services.ArtistService;
 import com.rickyphewitt.emby.mini.music.services.DisplayOrganizerService;
 import com.rickyphewitt.emby.mini.music.services.FragmentService;
-import com.rickyphewitt.emby.mini.music.services.LoginService;
 
 @Controller
 public class AlbumController {
@@ -24,7 +24,7 @@ public class AlbumController {
 	AlbumService albumService;
 	
 	@Autowired
-	LoginService loginService;
+	ApiService loginService;
 	
 	@Autowired
 	DisplayOrganizerService displayOrganizerService;
@@ -33,8 +33,19 @@ public class AlbumController {
 	FragmentService fragmentService;
 	
 	@RequestMapping("/albums")
-	public String artist(Model model) {
+	public String albums(Model model) {
 		
 		return fragmentService.getFragment("albums");
+	}
+	
+	@RequestMapping("/album/{id}")
+	public String album(@PathVariable("id") String id, Model model) {
+		Album album = albumService.getAlbums().get(id);
+		SongSet songs = loginService.getSongsFromAlbum(id);
+		model.addAttribute("album", album);
+		model.addAttribute("songs", songs.getItems());
+		return fragmentService.getFragment("album");
+		
+		
 	}
 }

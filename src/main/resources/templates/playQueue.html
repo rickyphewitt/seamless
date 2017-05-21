@@ -8,18 +8,15 @@
                 <table class="table">
 	                	<tr th:each="queueSong : ${queue}" class="nowPlayingQueueItem">
 	                		<td th:text="${queueSong.trackNumber}">1</td>
-	                		<td th:id="${queueSong.id}" class="playQueueSong" data-th-attr="songId=${queueSong.id}" th:text="${queueSong.name}">BatCountry</td>
+	                		<td th:id="${queueSong.id}" class="playSong" 
+	                			data-th-attr="songId=${queueSong.id}" 
+	                			th:text="${queueSong.name}">BatCountry</td>
 	                		<td th:text="${queueSong.container}">City of Evil</td>
 	                		<td th:text="${queueSong.runTimeTicks}">Avenged Sevenfold</td>
 	                	</tr>	
                 </table>                	
                 
             </div>
-            <script th:inline="javascript">
-            /*<![CDATA[*/
-				 
-            /*]]>*/
-            </script>
         </div>
 </body>
 </html>

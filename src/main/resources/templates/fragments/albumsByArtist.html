@@ -8,18 +8,18 @@
                 <ul>
                 	<th:block th:each="album : ${albums}">
                 	<span class="albumPlay" data-th-attr="albumId=${album.id}" th:id="${album.id}"> Play </span>
-                    <a th:href="@{/albums/{id}/(id=${album.id})}" href="/albums/albumKey">
-                    	<li th:text="${album.name}">
+                    <!-- <a th:href="@{/albums/{id}/(id=${album.id})}" href="/albums/albumKey"> -->
+                    	<li class="album" id="albumIdHere" th:id="${album.id}" data-th-attr="albumId=${album.id}" th:text="${album.name}">
                     	Alesana
                    		</li>
-                   	</a>
+                   	<!-- </a> -->
                 	</th:block>
                 </ul>
                 
             </div>
             <script th:inline="javascript">
             /*<![CDATA[*/ 
-            function playAlbum(albumId) {
+/*            function playAlbum(albumId) {
             	console.log(albumId);
 				url="/play/album/" + albumId;
 				$("#player").attr("src", url);
@@ -30,7 +30,7 @@
             	  $(".albumPlay").click(function() {  //use a class, since your ID gets mangled
             		  playAlbum($(this).attr('albumId'));     //add the class to the clicked element
             	  });
-            	});
+            	});*/
             
             /*]]>*/
             </script>

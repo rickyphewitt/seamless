@@ -7,10 +7,12 @@ import com.rickyphewitt.emby.api.data.SongSet;
 public abstract class PlayQueueEventBase extends ApplicationEvent {
 	
 	private SongSet songs;
-
-	public PlayQueueEventBase(Object source, SongSet songs) {
+	private int playingItemNumber;
+	
+	public PlayQueueEventBase(Object source, SongSet songs, int playingItemNumber) {
 		super(source);
 		this.songs = songs;
+		this.playingItemNumber = playingItemNumber;
 	}
 	
 	public SongSet getSongs() {
@@ -19,6 +21,14 @@ public abstract class PlayQueueEventBase extends ApplicationEvent {
 
 	public void setSongs(SongSet songs) {
 		this.songs = songs;
+	}
+
+	public int getPlayingItemNumber() {
+		return playingItemNumber;
+	}
+
+	public void setPlayingItemNumber(int playingItemNumber) {
+		this.playingItemNumber = playingItemNumber;
 	}
 
 	

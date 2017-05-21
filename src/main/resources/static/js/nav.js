@@ -8,6 +8,7 @@
 var homeUrl = "/home"
 var artistsUrl = "/artists";
 var albumsUrl = "/albums"
+var albumUrl = "/album"
 var genresUrl = "/genres"
 var playlistsUrl = "/playlists"
 var favoritesUrl = "/favorites"
@@ -28,8 +29,10 @@ var nowPlayingQueueId = "#nowPlayingQueue";
 // css classes
 var artistClass = "artist";
 var artistsAllClass = "artistsAll";
+var albumClass = "album";
 // fully qualified css classes
 var artistClassFQ = "." + artistClass;
+var albumClassFQ = "." + albumClass;
 
 /* Top Nav */
 function navGoTo(location) {
@@ -39,8 +42,23 @@ function navGoTo(location) {
 /* Artist Nav */
 function gotToArtist(artist) {
     $(innerContentDiv).toggleClass(artistsAllClass);
-	$(innerContentDiv).load(artistsUrl +"/"+ artist.attr(artistIdAttr));
+	$(innerContentDiv).load(artistsUrl +"/"+ artist.attr(artistIdAttr), function() {
+		loadAlbumPlayJs();
+		 // open album
+		 $(albumClassFQ).click(function() {
+			 console.log($(this));
+			 goToAlbum($(this));
+		  });
+	});
+	
     
+}
+/* Album Nav */
+function goToAlbum(album) {
+	console.log('AlbumId: ' + albumIdAttr);
+	$(innerContentDiv).load(albumUrl +"/"+ album.attr(albumIdAttr), function() {
+		loadAlbumSongPlayJs();
+	});
 }
 
 /* Footer Nav */
@@ -75,9 +93,9 @@ $(function() {
 		});
 	});
 	
-	// adds click to artists
-	 $(artistClassFQ).click(function() {  //use a class, since your ID gets mangled
-		  gotToArtist($(this));     //add the class to the clicked element
+	// open artist
+	 $(artistClassFQ).click(function() {  
+		  gotToArtist($(this));
 	  });
 
 });

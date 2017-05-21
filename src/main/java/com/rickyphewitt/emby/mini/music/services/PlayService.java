@@ -10,18 +10,19 @@ import com.rickyphewitt.emby.mini.music.publishers.PlayEventPublisher;
 public class PlayService {
 
 	@Autowired
-	LoginService loginService;
+	ApiService loginService;
 	
 	@Autowired
 	PlayEventPublisher playEventPublisher;
 	
 	public byte[] playAlbum(String albumId, int startTrack) {
 		SongSet songs = loginService.getSongsFromAlbum(albumId);
+		int baseZeroTrackNumber = toBaseZero(startTrack);
 		
 		// publish play event
-		playEventPublisher.setQueue(songs);
+		playEventPublisher.setQueue(songs, baseZeroTrackNumber);
 		
-		return playSong(songs.getItems().get(toBaseZero(startTrack)).getId());
+		return playSong(songs.getItems().get(baseZeroTrackNumber).getId());
 	}
 	
 	public byte[] playQueueSong(String songId) {

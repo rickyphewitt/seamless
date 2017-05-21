@@ -14,8 +14,13 @@ public class PlayEventPublisher {
     private ApplicationEventPublisher applicationEventPublisher;
  
     public void setQueue(SongSet songs) {
-        SetPlayQueueEvent setQueueEvent = new SetPlayQueueEvent(this, songs);
+        SetPlayQueueEvent setQueueEvent = new SetPlayQueueEvent(this, songs, 0);
         applicationEventPublisher.publishEvent(setQueueEvent);
     }
-
+    
+    public void setQueue(SongSet songs, int playingItemNumber) {
+        SetPlayQueueEvent setQueueEvent = new SetPlayQueueEvent(this, songs, playingItemNumber);
+        applicationEventPublisher.publishEvent(setQueueEvent);
+    }
+    
 }

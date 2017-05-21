@@ -16,7 +16,7 @@ public class QueueObserver implements ApplicationListener<SetPlayQueueEvent>{
 	
 	@Override
 	public void onApplicationEvent(SetPlayQueueEvent event) {
-		playQueueService.setPlayQueue(event.getSongs());		
+		playQueueService.setPlayQueue(event.getSongs(), event.getPlayingItemNumber());		
 	}
 
 }

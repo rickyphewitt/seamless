@@ -15,7 +15,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	String index(Model model) {
-		String goTo = "redirect:login";
+		String goTo = "redirect:connect";
 		if(serverService.isLoggedIn()) {
 			goTo = "redirect:music";
 		}

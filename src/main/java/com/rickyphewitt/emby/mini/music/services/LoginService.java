@@ -1,47 +1,104 @@
 package com.rickyphewitt.emby.mini.music.services;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-import com.rickyphewitt.emby.api.client.ApiV1Client;
-import com.rickyphewitt.emby.api.data.AlbumSet;
-import com.rickyphewitt.emby.api.data.ArtistSet;
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.emby.api.data.AuthenticationResult;
+import com.rickyphewitt.emby.api.data.PublicServerInfo;
+import com.rickyphewitt.emby.api.data.User;
+import com.rickyphewitt.emby.api.data.UserSet;
+import com.rickyphewitt.emby.mini.music.constants.UrlConstants;
+import com.rickyphewitt.emby.mini.music.data.Server;
 
 @Service
 public class LoginService {
-
+	
 	@Autowired
-	ApiV1Client apiClient;
+	ApiService apiService;
+		
+	@Autowired
+	ServerService serverService;
 	
-	public LoginService() {}
+	@Autowired
+	FragmentService fragmentService;
 	
-	@Retryable(maxAttempts = 5)
-	public void login() {
-		apiClient.authenticateByName();
+	public void login(User user, String password) throws Exception {
+		AuthenticationResult authResult = apiService.login(user.getName(), password);
+		if(!isAuthed(authResult)) {
+			throw new Exception("Failed To Log in!");
+		}
 	}
 	
-	@Retryable(maxAttempts = 5)
-	public ArtistSet getArtists() {
-		return apiClient.getArtists();
+	
+	public void loginUserPasswordNotSet(User user) throws Exception {
+		login(user, serverService.getServer().getPassword());
 	}
-	@Retryable(maxAttempts = 5)
-	public AlbumSet getAlbumsByArtist(String artistId) {
-		return apiClient.getAlbumsByArtist(artistId);
+	
+	
+	public String login(UserSet users) throws Exception {
+		String returnUrl = UrlConstants.loginUrl;
+		if(isSinglePublicUser(users)) {
+			loginUserPasswordNotSet(users.getItems().get(0));
+			returnUrl = UrlConstants.homeUrl;
+		}		
+		return returnUrl;
 	}
-	@Retryable(maxAttempts = 5)
-	public SongSet getSongsFromAlbum(String albumId) {
-		return apiClient.getAlbumSongs(albumId);
+	
+	public Server getServer() {
+		serverService = new ServerService(apiService.getEmbyUrl(),
+				apiService.getUsername(), apiService.getPassword());
+		
+		return serverService.getServer();
+	}
+	
+	public PublicServerInfo connect(String embyUrl) {
+		updateUrlOnChanged(embyUrl);
+
+		PublicServerInfo pubInfo = apiService.getPublicServerInfo(embyUrl);
+		serverService.setPublicServerInfo(pubInfo);
+		return pubInfo;
+	}
+	
+	public UserSet getPublicUsers() {
+		return apiService.getPublicUsers();
+	}
+
+	public boolean isSinglePublicUser(UserSet users) {
+		boolean singleUser = false;
+		if(users.getItems().size() == 1) {
+			singleUser = true;
+		}
+		
+		return singleUser;
 		
 	}
 	
-	public byte[] getSong(String songId) {
-		return apiClient.getSong(songId);
+	
+	public static boolean validateEmbyHostUrl(String url) {
+		boolean isValid = false;
+		if(url != null && url != "" && url.length() > 5) {
+			isValid = true;
+		}
 		
+		return isValid;
 	}
+	
+	
+	private boolean isAuthed(AuthenticationResult authResult) {
+		boolean isAuthed = false;
+		if(authResult.getAccessToken() != "" ){
+				isAuthed = true;
+		}
+		
+		return isAuthed;
+	}
+	
+	
+	private void updateUrlOnChanged(String embyUrl) {
+		if(!embyUrl.equals(serverService.getServer().getUrl())) {
+			serverService.getServer().setUrl(embyUrl);
+		}
+	}
+	
 	
 }
-

@@ -11,6 +11,7 @@ public class FragmentConstants {
 	// Fragment Names
 	public static final String FRAGMENT_ARTISTS= "artists";
 	public static final String FRAGMENT_ALBUMS = "albums";
+	public static final String FRAGMENT_ALBUM = "album";
 	public static final String FRAGMENT_ALBUMS_BY_ARTIST = "albumsByArtist";
 	public static final String FRAGMENT_GENRES = "genres";
 	public static final String FRAGMENT_PLAYLISTS = "playlists";

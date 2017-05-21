@@ -70,6 +70,15 @@ public class PlayQueueService {
 		setIndexes(playQueue.size());
 	}
 	
+	public void setPlayQueue(SongSet songs, int playingItemNumber) {
+		playQueue.clear();
+		for(Song s: songs.getItems()) {
+			playQueue.add(s);
+		}
+		setIndexes(playQueue.size());
+		currentIndex = playingItemNumber;
+	}
+	
 	public void add(Song song) {
 		playQueue.add(song);
 	}

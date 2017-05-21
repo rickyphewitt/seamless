@@ -7,25 +7,19 @@
 <body>
 
 <div class="container">
-
-        <div class="jumbotron">
-            <div class="row text-center">
                 <div class="">
                     <h2>Login</h2>
                     <form action="#" th:action="@{/connect}" th:object="${server}" method="post">
-						<input type="text" th:field="*{username}" />
+						<label for="serverUrl">Emby Url</label>
+						<input type="text" id="serverUrl" th:field="*{url}" />
+						<label for="username">username</label>
+						<input type="text" id="username" th:field="*{username}" />
 						<input type="text" th:field="*{password}" />
-						<input type="text" th:field="*{url}" />
 						<label th:for="${#ids.next('persist')}" th:text="${stayLoggedIn}">Persiste Session</label>
 						<input type="checkbox" th:field="*{persist}" />
 						<button type="submit" class="btn btn-default">Login</button>
                     </form>
-
                 </div>
-            </div>
-        </div>
-
-
 </div>
 </body>
 </html>

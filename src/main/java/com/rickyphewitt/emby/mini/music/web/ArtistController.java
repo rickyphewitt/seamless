@@ -12,7 +12,7 @@ import com.rickyphewitt.emby.mini.music.services.AlbumService;
 import com.rickyphewitt.emby.mini.music.services.ArtistService;
 import com.rickyphewitt.emby.mini.music.services.DisplayOrganizerService;
 import com.rickyphewitt.emby.mini.music.services.FragmentService;
-import com.rickyphewitt.emby.mini.music.services.LoginService;
+import com.rickyphewitt.emby.mini.music.services.ApiService;
 
 @Controller
 public class ArtistController {
@@ -24,7 +24,7 @@ public class ArtistController {
 	AlbumService albumService;
 	
 	@Autowired
-	LoginService loginService;
+	ApiService loginService;
 	
 	@Autowired
 	DisplayOrganizerService displayOrganizerService;

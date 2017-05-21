@@ -12,7 +12,7 @@ import com.rickyphewitt.emby.api.data.ArtistSet;
 public class ArtistService {
 
 	@Autowired
-	LoginService loginService;
+	ApiService loginService;
 	
 	private HashMap<String, Artist> artists;
 	private ArtistSet artistSet;

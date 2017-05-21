@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rickyphewitt.emby.api.data.Song;
 import com.rickyphewitt.emby.api.data.SongSet;
 import com.rickyphewitt.emby.mini.music.publishers.PlayEventPublisher;
-import com.rickyphewitt.emby.mini.music.services.LoginService;
+import com.rickyphewitt.emby.mini.music.services.ApiService;
 import com.rickyphewitt.emby.mini.music.services.PlayService;
 
 import test.com.rickyphewitt.emby.mini.music.TestConfig;
@@ -35,7 +35,7 @@ public class PlayServiceTests {
 	PlayService playService;
 	
 	@Mock
-	LoginService loginService;
+	ApiService loginService;
 	
 	@Mock
 	PlayEventPublisher playEventPublisher;

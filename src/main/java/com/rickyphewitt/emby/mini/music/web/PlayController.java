@@ -24,6 +24,12 @@ public class PlayController {
 	public @ResponseBody byte[] play(@PathVariable("id") String id, Model model) {
 		return playService.playAlbum(id, 1);
 	}
+
+	@RequestMapping(value="/play/album/{id}/{trackNumber}", produces = MediaType.ALL_VALUE)
+	public @ResponseBody byte[] play(@PathVariable("id") String id,
+			@PathVariable("trackNumber") int trackNumber, Model model) {
+		return playService.playAlbum(id, trackNumber);
+	}
 	
 	@RequestMapping(value="/play/queue/song/{id}", produces = MediaType.ALL_VALUE)
 	public @ResponseBody byte[] playQueueSong(@PathVariable("id") String id, Model model) {

@@ -14,7 +14,7 @@ import com.rickyphewitt.emby.api.data.ArtistSet;
 public class AlbumService {
 
 	@Autowired
-	LoginService loginService;
+	ApiService loginService;
 	
 	private HashMap<String, Album> albums;
 	private AlbumSet albumSet;

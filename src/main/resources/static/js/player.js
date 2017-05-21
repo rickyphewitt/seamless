@@ -6,13 +6,19 @@
 
 /* Global Vars */
 // Urls
-var basePlayQueueUrl = "/play/queue";
+var basePlayUrl = "/play";
+var basePlayQueueUrl = basePlayUrl + "/queue";
 var playNextUrl = basePlayQueueUrl + "/next";
 var playPrevUrl = basePlayQueueUrl + "/prev";
 var playSongUrl = basePlayQueueUrl + "/song/";
 var playCurrentUrl = basePlayQueueUrl + "/playing"
+
+var playAlbumUrl = basePlayUrl + "/album/";
+
 // attributes
 var queueLineSongIdAttr = "songId";
+var albumIdAttr = "albumId";
+var trackNumberAttr = "trackNumber";
 var srcAttribute = "src";
 // css ids
 var playerId = "#player";
@@ -21,12 +27,13 @@ var prevId = "#controlsPrev";
 var playId = "#controlsPlay";
 // css classes
 var nowPlayingQueueItemClass = "nowPlayingQueueItem";
-var nowPlayingQueueSongClass = "playQueueSong";
+var nowPlayingQueueSongClass = "playSong";
 var nowPlayingHighlightClass = "bg-primary";
+var albumPlayClass = "albumPlay";
 // fully qualified css classes
 var nowPlayingQueueItemClassFQ = "." + nowPlayingQueueItemClass;
 var nowPlayingQueueSongClassFQ = "."+ nowPlayingQueueSongClass; 
-
+var albumPlayClassFQ = "."+ albumPlayClass;
 
 /* Glyphicon classes */
 var playGlyph = "glyphicon-play";
@@ -49,7 +56,7 @@ function setCurentlyPlaying() {
 	$.ajax({
 		  url: playCurrentUrl
 		}).done(function(data) {
-			setNowPlayingQueue($("#"+data));
+			setNowPlayingQueueItem($("#"+data));
 		});
 }
 
@@ -58,11 +65,11 @@ function playSongFromQueue(nextOrPrevUrl) {
 		  url: nextOrPrevUrl
 		}).done(function(data) {
 			playSong(data);
-			setNowPlayingQueue($("#"+data));
+			setNowPlayingQueueItem($("#"+data));
 		});
 }
 
-function setNowPlayingQueue(playedElement) {
+function setNowPlayingQueueItem(playedElement) {
 	$(nowPlayingQueueItemClassFQ).removeClass(nowPlayingHighlightClass);
 	playedElement.closest("tr").addClass(nowPlayingHighlightClass);
 }
@@ -84,12 +91,36 @@ function playSong(songId) {
 	$(playerId).attr(srcAttribute, playSongUrl + songId);
 }
 
+function playAlbum(albumId) {
+	$(playerId).attr(srcAttribute, playAlbumUrl + albumId);
+}
+
+function playSongFromAlbum(albumId, trackNumber) {
+	$(playerId).attr(srcAttribute, playAlbumUrl + albumId + "/" + trackNumber);
+}
+
 /* function that loads all queue required js */
 function loadQueueJs() {
 	setCurentlyPlaying();
 	$(nowPlayingQueueSongClassFQ).click(function() {
 		  playSong($(this).attr(queueLineSongIdAttr));
-		  setNowPlayingQueue($(this));
+		  setNowPlayingQueueItem($(this));
+	  });
+}
+
+/* function that loads all album play js */
+function loadAlbumPlayJs() {
+	 $(albumPlayClassFQ).click(function() {
+		  playAlbum($(this).attr(albumIdAttr));
+	  });
+	 
+}
+
+/* function that loads all song play js */
+function loadAlbumSongPlayJs() {
+	$(nowPlayingQueueSongClassFQ).click(function() {
+		playSongFromAlbum($(this).attr(albumIdAttr), $(this).attr(trackNumberAttr));
+		setNowPlayingQueueItem($(this));
 	  });
 }
 

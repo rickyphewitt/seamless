@@ -9,8 +9,8 @@ public class SetPlayQueueEvent extends PlayQueueEventBase {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SetPlayQueueEvent(Object source, SongSet songs) {
-		super(source, songs);
+	public SetPlayQueueEvent(Object source, SongSet songs, int playingItemNumber) {
+		super(source, songs, playingItemNumber);
 	}
 
 

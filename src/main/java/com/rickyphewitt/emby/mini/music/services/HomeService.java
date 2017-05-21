@@ -18,7 +18,7 @@ import junit.framework.Assert;
 public class HomeService {
 
 	@Autowired
-	LoginService loginService;
+	ApiService apiService;
 	
 	@Autowired
 	ArtistService artistService;
@@ -35,7 +35,7 @@ public class HomeService {
 	public String home(Model model, HttpServletResponse response) {
 		
 		// Log into emby server
-		loginService.login();
+		//apiService.login();
 		
 		// get all artists
 		artistService.loadArtists();
