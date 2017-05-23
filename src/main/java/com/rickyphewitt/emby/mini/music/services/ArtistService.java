@@ -16,6 +16,7 @@ public class ArtistService {
 	
 	private HashMap<String, Artist> artists;
 	private ArtistSet artistSet;
+	private String currentArtistId;
 	
 	public void loadArtists() {
 		this.artistSet = loginService.getArtists();
@@ -46,6 +47,14 @@ public class ArtistService {
 
 	public void setArtistSet(ArtistSet artistSet) {
 		this.artistSet = artistSet;
+	}
+
+	public String getCurrentArtistId() {
+		return currentArtistId;
+	}
+
+	public void setCurrentArtistId(String currentArtistId) {
+		this.currentArtistId = currentArtistId;
 	}
 	
 	

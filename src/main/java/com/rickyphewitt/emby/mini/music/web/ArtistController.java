@@ -34,7 +34,7 @@ public class ArtistController {
 	
 	@RequestMapping("/artists/{id}")
 	public String artist(@PathVariable("id") String id, Model model) {
-
+		artistService.setCurrentArtistId(id);
 		Artist artist = artistService.getArtists().get(id);
 		albumService.loadAlbums(id);
 		model.addAttribute("artist", artist);

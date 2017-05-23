@@ -3,13 +3,15 @@
 <body>
 <div th:fragment="album" id="innerContent" class="row">
             <div class="col-lg-12">
-            <h2 th:text="${album.name}">Albums</h2>
+            <h2 id="artistName" th:text="${artist.name}">artist</h2>
+            <h2 id="albumName" th:text="${album.name}">Albums</h2>
             <table class="table">
                	<tr th:each="song : ${songs}">
                		<td th:text="${song.trackNumber}">1</td>
                		<td th:id="${song.id}" class="playSong"
                			data-th-attr="albumId=${album.Id},
-        							trackNumber=${song.trackNumber}" 
+        							trackNumber=${song.trackNumber},
+        							songName=${song.Name}" 
                			th:text="${song.name}">BatCountry</td>
                		<td th:text="${song.container}">City of Evil</td>
                		<td th:text="${song.runTimeTicks}">Avenged Sevenfold</td>

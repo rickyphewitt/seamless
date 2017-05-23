@@ -40,8 +40,10 @@ public class AlbumController {
 	
 	@RequestMapping("/album/{id}")
 	public String album(@PathVariable("id") String id, Model model) {
+		albumService.setCurrentAlbumId(id);
 		Album album = albumService.getAlbums().get(id);
 		SongSet songs = loginService.getSongsFromAlbum(id);
+		model.addAttribute("artist", artistService.getArtists().get(artistService.getCurrentArtistId()));
 		model.addAttribute("album", album);
 		model.addAttribute("songs", songs.getItems());
 		return fragmentService.getFragment("album");

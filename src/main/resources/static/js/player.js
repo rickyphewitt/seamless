@@ -20,11 +20,19 @@ var queueLineSongIdAttr = "songId";
 var albumIdAttr = "albumId";
 var trackNumberAttr = "trackNumber";
 var srcAttribute = "src";
+var songNameAttr = "songName";
+
 // css ids
 var playerId = "#player";
 var nextId = "#controlsNext";
 var prevId = "#controlsPrev";
 var playId = "#controlsPlay";
+var playingSongName = "#playingSongName";
+var playingSongArtistName = "#playingSongArtistName";
+var playingSongAlbumName = "#playingSongAlbumName";
+var activeArtistName = "#artistName";
+var activeAlbumName = "#albumName";
+
 // css classes
 var nowPlayingQueueItemClass = "nowPlayingQueueItem";
 var nowPlayingQueueSongClass = "playSong";
@@ -93,10 +101,17 @@ function playSong(songId) {
 
 function playAlbum(albumId) {
 	$(playerId).attr(srcAttribute, playAlbumUrl + albumId);
+	
 }
 
 function playSongFromAlbum(albumId, trackNumber) {
 	$(playerId).attr(srcAttribute, playAlbumUrl + albumId + "/" + trackNumber);
+}
+
+function setPlayerInfo(artistName, albumName, songName) {
+	$(playingSongName).text(songName);
+	$(playingSongArtistName).text(artistName);
+	$(playingSongAlbumName).text(albumName);
 }
 
 /* function that loads all queue required js */
@@ -120,6 +135,7 @@ function loadAlbumPlayJs() {
 function loadAlbumSongPlayJs() {
 	$(nowPlayingQueueSongClassFQ).click(function() {
 		playSongFromAlbum($(this).attr(albumIdAttr), $(this).attr(trackNumberAttr));
+		setPlayerInfo($(activeArtistName).text(), $(activeAlbumName).text(), $(this).attr(songNameAttr));
 		setNowPlayingQueueItem($(this));
 	  });
 }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.rickyphewitt.emby.api.data.Album;
 import com.rickyphewitt.emby.api.data.AlbumSet;
-import com.rickyphewitt.emby.api.data.Artist;
-import com.rickyphewitt.emby.api.data.ArtistSet;
 
 @Service
 public class AlbumService {
@@ -18,6 +16,7 @@ public class AlbumService {
 	
 	private HashMap<String, Album> albums;
 	private AlbumSet albumSet;
+	private String currentAlbumId;
 	
 	public void loadAlbums(String artistId) {
 		this.albumSet = loginService.getAlbumsByArtist(artistId);
@@ -46,6 +45,14 @@ public class AlbumService {
 
 	public void setAlbumSet(AlbumSet albumSet) {
 		this.albumSet = albumSet;
+	}
+
+	public String getCurrentAlbumId() {
+		return currentAlbumId;
+	}
+
+	public void setCurrentAlbumId(String currentAlbumId) {
+		this.currentAlbumId = currentAlbumId;
 	}
 
 	
