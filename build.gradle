@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	group = 'com.rickyphewitt.emby.mini.music'
+	group = 'com.rickyphewitt.seamless'
 	version = '0.0.1-SNAPSHOT'
 }
 
