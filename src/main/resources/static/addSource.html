@@ -12,15 +12,16 @@
                 <div id="sidebar" class="floatLeft">
                     <div id="sidebarContentContainer" class="corners mainBg content mediumPadding">
                     <div id="sidebarHeading" class="corners secondaryBg">
-                        <div id="hamNav" class="floatLeft mediumPadding navButton corners"> <img src="images/hamNav.png" /></div>
-
+                        <div id="hamNav" class="floatLeft mediumPadding navButton corners">
+                        <img src="images/hamNav.png" /></li>
+                        </div>
                         <div id="sidebarHeader" class="header navHeader floatRight">
-                            <h1>Artists</h1>
+                            <h1>Menu</h1>
                         </div>
                         <div class="clearLeft"></div>
                     </div>
                     <div id="sidebarContent" class="verticleOverflow content mediumPadding">
-                        <ul>
+                        <ul class="hidden">
                             <li>Aaron Gillespie</li>
                             <li>Abandon All Ships</li>
                             <li>Academy Is</li>
@@ -84,6 +85,14 @@
                             <li>Armor for Sleep</li>
                             <li>Artery Recordings</li>
                         </ul>
+                        <ul id="menu" class="menu">
+                            <li>Artists</li>
+                            <li>Albums</li>
+                            <li>Genres</li>
+                            <li>Playlists</li>
+                            <li>Favorites</li>
+                            <li>Settings</li>
+                        </ul>
                         <div class="filler"></div>
                     </div>
                 </div>
@@ -99,37 +108,55 @@
                             <div id="search" class="search secondaryBg floatRight"><input type="text" class="searchBox secondaryBg" value="search" /><img src="images/search.png" class="searchImg floatRight smallPadding" /></div>
                         </div>
                     <div id="contentHeading" class="floatRight hugeHeader secondaryText clearleft">
-                        <h1>Anberlin</h1>
+                        <h1>Sources</h1>
                     </div>
                     <div id="contentContent" class="contentContent clearLeft">
-                        <div id="albums" class="verticleOverflow">
-                            <div class="albumContainer smallPadding floatLeft">
-                                <div class="album albumBorderBg">
-                                    <div class="albumCover albumDefaultBg">Cities</div>
-                                </div>
-                                <div class="albumInfo">
-                                    <span class="albumTitle">Cities</span> -
-                                    <span class="albumYear">2009</span>
-                                </div>
-                            </div>
-                            <div class="albumContainer smallPadding floatLeft">
-                                <div class="album albumBorderBg">
-                                    <div class="albumCover albumDefaultBg">New Surrender</div>
-                                </div>
-                                <div class="albumInfo">
-                                    <span class="albumTitle">New Surrender</span> -
-                                    <span class="albumYear">2012</span>
-                                </div>
-                            </div>
-                            <div class="albumContainer smallPadding floatLeft">
-                                <div class="album albumBorderBg">
-                                    <div class="albumCover albumDefaultBg">Never Take Friendship Personal</div>
-                                </div>
-                                <div class="albumInfo">
-                                    <span class="albumTitle">Never Take Friendship Personal</span> -
-                                    <span class="albumYear">2009</span>
-                                </div>
-                            </div>
+                        <div id="sources" class="verticleOverflow">
+                        </div>
+                        <div id="queue" class="verticleOverflow queue">
+                            <table class="queueTable largePadding">
+                                <tbody>
+                                    <tr class="queueTr">
+                                        <td class="mediumPadding queueTd">
+                                            <select class="smallPadding input corners mainBg">
+                                              <option value="local">local</option>
+                                              <option value="Emby">Emby</option>
+                                              <option value="Subsonic">Subsonic</option>
+                                              <option value="WizbangFoo">WizbangFoo</option>
+                                            </select>
+                                        </td>
+                                        <td class="mediumPadding queueTd"><input class="smallPadding input corners mainBg" type="text" value="username" /></td>
+                                        <td class="mediumPadding queueTd"><input class="smallPadding input corners mainBg" type="password" value="password" /></td>
+                                        <td class="mediumPadding queueTd"><input class="smallPadding input corners mainBg" type="text" value="https://server" /></td>
+                                        <td class="mediumPadding queueTd "><input class="smallPadding input corners mainBg" type="checkbox" checked /></td>
+                                        <td class="mediumPadding queueTd">+</td>
+                                    </tr>
+                                    <tr class="queueTr secondaryBg">
+                                        <td class="mediumPadding queueTd">Emby</td>
+                                        <td class="mediumPadding queueTd">username</td>
+                                        <td class="mediumPadding queueTd">**********</td>
+                                        <td class="mediumPadding queueTd">https://emby:8096</td>
+                                        <td class="mediumPadding queueTd ">Enabled</td>
+                                        <td class="mediumPadding queueTd">X</td>
+                                    </tr>
+                                    <tr class="queueTr">
+                                        <td class="mediumPadding queueTd">Subsonic</td>
+                                        <td class="mediumPadding queueTd">username</td>
+                                        <td class="mediumPadding queueTd">**********</td>
+                                        <td class="mediumPadding queueTd">https://subsonic:8080</td>
+                                        <td class="mediumPadding queueTd ">Enabled</td>
+                                        <td class="mediumPadding queueTd">X</td>
+                                    </tr>
+                                    <tr class="queueTr secondaryBg">
+                                        <td class="mediumPadding queueTd">Local</td>
+                                        <td class="mediumPadding queueTd">NA</td>
+                                        <td class="mediumPadding queueTd">NA</td>
+                                        <td class="mediumPadding queueTd">/home/user/music</td>
+                                        <td class="mediumPadding queueTd ">Enabled</td>
+                                        <td class="mediumPadding queueTd">X</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     </div>
