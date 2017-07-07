@@ -29,6 +29,7 @@
   		<apache.httpcomponents.version>4.5.3</apache.httpcomponents.version>
   		<bootstrap.webjar.version>3.3.7-1</bootstrap.webjar.version>
   		<jquery.webjar.version>3.2.0</jquery.webjar.version>
+  		<jquery.ui.webjar.version>1.12.1</jquery.ui.webjar.version>
   		<emby.api.version>0.0.1-SNAPSHOT</emby.api.version>
   	</properties>
   	
@@ -90,7 +91,12 @@
 	  			<groupId>org.webjars</groupId>
 	  			<artifactId>jquery</artifactId>
 	  			<version>${jquery.webjar.version}</version>
-	 		</dependency>	
+	 		</dependency>
+	 		<dependency>
+			    <groupId>org.webjars</groupId>
+			    <artifactId>jquery-ui</artifactId>
+			    <version>${jquery.ui.webjar.version}</version>
+			</dependency>	
   		</dependencies>
   	</dependencyManagement>
   	

@@ -17,4 +17,5 @@ public class FragmentConstants {
 	public static final String FRAGMENT_PLAYLISTS = "playlists";
 	public static final String FRAGMENT_FAVORITES = "favorites";
 	public static final String FRAGMENT_SETTINGS = "settings";
+	public static final String FRAGMENT_PLAY_QUEUE = "playQueue";
 }

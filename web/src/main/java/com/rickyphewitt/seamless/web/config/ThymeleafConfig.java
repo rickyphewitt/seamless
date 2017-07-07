@@ -1,4 +1,4 @@
-package com.rickyphewitt.seamless.services.config;
+package com.rickyphewitt.seamless.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

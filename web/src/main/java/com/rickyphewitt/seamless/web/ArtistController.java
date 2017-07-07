@@ -39,6 +39,6 @@ public class ArtistController {
 		albumService.loadAlbums(id);
 		model.addAttribute("artist", artist);
 		model.addAttribute("albums", albumService.getAlbumSet().getItems());
-		return fragmentService.getFragment("albumsByArtist");
+		return fragmentService.getFragment("albums");
 	}
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <title>Emby Mini Music</title>
+    <!--/*/ <th:block th:include="fragments/header :: head"></th:block> /*/-->
+</head>
+<body>
+
+<div class="container">
+
+                <div class="">
+                    <h2>Login</h2>
+                    <form action="#" th:action="@{/connect}" method="post">
+						<label for="serverUrl">Emby Url</label>
+						<input type="text" id="url" name="url" th:name="url" value="Http://emby:8096" />
+						<button type="submit" class="btn btn-default">Connect To Server</button>
+                    </form>
+                </div>
+
+
+</div>
+</body>
+</html>

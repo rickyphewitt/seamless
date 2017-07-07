@@ -26,9 +26,6 @@ public class AlbumController {
 	@Autowired
 	ApiService loginService;
 	
-	@Autowired
-	DisplayOrganizerService displayOrganizerService;
-	
 	@Autowired 
 	FragmentService fragmentService;
 	

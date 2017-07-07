@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/reset.css"
+        <link href="../css/reset.css"
               th:href="@{/css/reset.css}" rel="stylesheet" media="screen"/>
-        <link href="css/style-blue.css"
+        <link href="../css/style-blue.css"
         th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
     </head>
     <body>
@@ -12,7 +12,7 @@
                 <div id="sidebar" class="floatLeft">
                     <div id="sidebarContentContainer" class="corners mainBg content mediumPadding">
                     <div id="sidebarHeading" class="corners secondaryBg">
-                        <div id="hamNav" class="floatLeft mediumPadding navButton corners"> <img src="images/hamNav.png" /></div>
+                        <div class="floatLeft mediumPadding navButton corners"> <img id="appHamNav" src="../images/hamNav.png" /></div>
 
                         <div id="sidebarHeader" class="header navHeader floatRight">
                             <h1>Artists</h1>
@@ -20,8 +20,8 @@
                         <div class="clearLeft"></div>
                     </div>
                     <div id="sidebarContent" class="verticleOverflow content mediumPadding">
-                        <ul>
-                            <li>Aaron Gillespie</li>
+                        <ul class="appContentList">
+                            <li class="appArtist">Aaron Gillespie</li>
                             <li>Abandon All Ships</li>
                             <li>Academy Is</li>
                             <li>Acceptance</li>
@@ -84,6 +84,14 @@
                             <li>Armor for Sleep</li>
                             <li>Artery Recordings</li>
                         </ul>
+                        <ul class="appMenuList menu hidden">
+                            <li>Artists</li>
+                            <li>Albums</li>
+                            <li>Genres</li>
+                            <li>Playlists</li>
+                            <li>Favorites</li>
+                            <li>Settings</li>
+                        </ul>
                         <div class="filler"></div>
                     </div>
                 </div>
@@ -96,7 +104,7 @@
                                 <div id="groupShuffle" name="groupShuffle" class="button navButton secondaryBg corners floatLeft">Shuffle</div>
                                 <div id="groupMix" name="groupMix" class="button secondaryBg navButton corners floatLeft">Mix</div>
                             </div>
-                            <div id="search" class="search secondaryBg floatRight"><input type="text" class="searchBox secondaryBg" value="search" /><img src="images/search.png" class="searchImg floatRight smallPadding" /></div>
+                            <div id="search" class="search secondaryBg floatRight"><input type="text" class="searchBox secondaryBg" value="search" /><img src="../images/search.png" class="searchImg floatRight smallPadding" /></div>
                         </div>
                     <div id="contentHeading" class="floatRight hugeHeader secondaryText clearleft">
                         <h1>Anberlin</h1>
@@ -150,21 +158,33 @@
                     Atreyu
                 </div>
                 <div id="playerControls" class="floatLeft">
-                    <div id="skipback" class="floatLeft smallControl"><img src="images/skipbackwardLight.png" /></div>
-                    <div id="prev" class="floatLeft mediumPadding"><img src="images/prevLight.png" /></div>
-                    <div id="play" class="floatLeft smallPadding"><img class="imgSize" src="images/playLight.png" /></div>
-                    <div id="next" class="floatLeft mediumPadding"><img src="images/nextLight.png" /></div>
-                    <div id="skipforward" class="floatLeft smallControl"><img src="images/skipforwardLight.png" /></div>
+                    <div id="skipback" class="floatLeft smallControl"><img src="../images/skipbackwardLight.png" /></div>
+                    <div id="prev" class="floatLeft mediumPadding"><img src="../images/prevLight.png" /></div>
+                    <div id="play" class="floatLeft smallPadding"><img class="imgSize" src="../images/playLight.png" /></div>
+                    <div id="next" class="floatLeft mediumPadding"><img src="../images/nextLight.png" /></div>
+                    <div id="skipforward" class="floatLeft smallControl"><img src="../images/skipforwardLight.png" /></div>
                 </div>
                 <div id="volume" class="volume floatLeft corners">
                     <div id="innerVolume" class="corners secondaryBg"></div>
                 </div>
 
-                <div id="queue" class="queue navButton secondaryBg smallPadding corners floatRight">
-                    <a href="queueTemplate.html"><img src="images/queue.png" /></a>
+                <div id="appQueue" class="navButton secondaryBg smallPadding corners floatRight">
+                        <a href="queueTemplate.html"><img src="../images/queue.png" /></a>
                 </div>
-                <div id="favorite" class="favorite floatRight"><img src="images/favorite.png" /></div>
+                <div id="favorite" class="favorite floatRight"><img src="../images/favorite.png" /></div>
             </div>
         </div>
+        <script th:src="@{/webjars/jquery/3.2.0/jquery.min.js}"
+                src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+        </script>
+        <script th:src="@{/js/common.js}" src="../js/common.js"></script>
+        <script th:src="@{/js/player.js}" src="../js/player.js"></script>
+        <script th:src="@{/js/nav.js}" src="../js/nav.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+
+            /*]]>*/
+            </script>
     </body>
 </html>

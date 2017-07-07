@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="album" id="innerContent" class="row">
+<div th:fragment="album" id="appContentContent" class="contentContent clearLeft">
+	<div id="queue" class="verticleOverflow queue">
+	    <table class="queueTable largePadding">
+	        <tbody>
+	            <tr th:each="song,iter : ${songs}" class="appQueueTr">
+	                <td class="mediumPadding queueTd" th:text="${iter.index}">1</td>
+	                <td class="mediumPadding queueTd" th:text="${song.name}">Adelaide</td>
+	                <td class="mediumPadding queueTd" th:text="${artist.name}">Anberlin</td>
+	                <td class="mediumPadding queueTd" th:text="${song.runTimeTicks}">3:30</td>
+	                <td class="mediumPadding queueTd">favorite</td>
+	                <td class="mediumPadding queueTd appPlaySong"
+						data-th-attr="entityId=${song.Id},
+									albumId=${album.Id},
+        							trackNumber=${iter.index},
+        							songName=${song.Name}">></td>
+	                <td class="mediumPadding queueTd">>+</td>
+	                <td class="mediumPadding queueTd">+</td>
+	            </tr>
+	        </tbody>
+	        </table>
+	</div>
+<!--
             <div class="col-lg-12">
             <h2 id="artistName" th:text="${artist.name}">artist</h2>
             <h2 id="albumName" th:text="${album.name}">Albums</h2>
@@ -11,21 +32,21 @@
                		<td th:id="${song.id}" class="playSong"
                			data-th-attr="albumId=${album.Id},
         							trackNumber=${song.trackNumber},
-        							songName=${song.Name}" 
+        							songName=${song.Name}"
                			th:text="${song.name}">BatCountry</td>
                		<td th:text="${song.container}">City of Evil</td>
                		<td th:text="${song.runTimeTicks}">Avenged Sevenfold</td>
-               	</tr>	
-             </table>         
+               	</tr>
+             </table>
             <script th:inline="javascript">
-            /*<![CDATA[*/ 
+            /*<![CDATA[*/
             /*function playAlbum(albumId) {
             	console.log(albumId);
 				url="/play/album/" + albumId;
 				$("#player").attr("src", url);
             }
-            
-            
+
+
             $(function() {                       //run when the DOM is ready
             	  $(".albumPlay").click(function() {  //use a class, since your ID gets mangled
             		  playAlbum($(this).attr('albumId'));     //add the class to the clicked element
@@ -34,7 +55,7 @@
             */
             /*]]>*/
             </script>
-        </div>
+        </div> -->
 </div>
 </body>
 </html>

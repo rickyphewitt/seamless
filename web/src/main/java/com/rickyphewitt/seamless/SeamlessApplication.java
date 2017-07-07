@@ -7,10 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import com.rickyphewitt.seamless.services.config.SeamlessServicesConfig;
+import com.rickyphewitt.seamless.web.config.SeamlessWebConfig;
 
 @SpringBootApplication
-@Import({SeamlessServicesConfig.class})
+@Import({SeamlessWebConfig.class})
 public class SeamlessApplication {
 	
 	public static void main(String[] args) throws ClientProtocolException, IOException {

@@ -1,7 +1,7 @@
 default: build run	
 	
 build:
-	gradle build
+	mvn clean install
 	
 run:
-	java -jar build/libs/embyMini-0.0.1-SNAPSHOT.jar 
+	java -jar web/target/web-0.0.1-SNAPSHOT.jar 

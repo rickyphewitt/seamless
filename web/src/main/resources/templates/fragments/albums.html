@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="albums" id="appContentContent" class="contentContent clearLeft">
+        <div id="albums" class="verticleOverflow">
+             <th:block th:each="album : ${albums}">
+                 <div class="albumContainer smallPadding floatLeft">
+                    <div class="appAlbum album albumBorderBg" data-th-attr="entityId=${album.id}">
+                        <div th:id="${album.id}" th:text="${album.name}" class="albumCover albumDefaultBg">Cities</div>
+                    </div>
+                    <div class="albumInfo">
+                        <span th:text="${album.name}" class="albumTitle">Cities</span> -
+                        <span class="albumYear">2009</span>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,7 +19,7 @@ import com.rickyphewitt.emby.api.services.clients.ApiV1Client;
 public class ApiService {
 
 	@Value("${emby.url}")
-	private String embyUrl;
+	private String embyUrl = "http://localhost:8096";
 	
 	@Value("${emby.username}")
 	private String username;

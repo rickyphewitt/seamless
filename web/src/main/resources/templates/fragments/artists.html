@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="artists" id="sidebarContent">
+        <ul class="appContentList">
+	       <th:block th:each="artist : ${artists}">
+    	      <li class="appArtistNav" data-th-attr="entityId=${artist.id}"
+                    th:text="${artist.name}">
+        	       Alesana
+               </li>
+    	      </th:block>
+          </ul>
+          <ul class="appMenuList menu hidden">
+              <li>Artists</li>
+              <li>Albums</li>
+              <li>Genres</li>
+              <li>Playlists</li>
+              <li>Favorites</li>
+              <li>Settings</li>
+          </ul>
+          <div class="filler"></div>
+          <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            /*]]>*/
+            </script>
+    </div>
+</body>
+</html>

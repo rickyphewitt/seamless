@@ -9,7 +9,7 @@ import com.rickyphewitt.emby.api.services.config.Config;
 import com.rickyphewitt.emby.api.services.config.GsonConfig;
 
 @Configuration
-@ComponentScan({"com.rickyphewitt.services", "com.rickyphewitt.emby.api"})
+@ComponentScan({"com.rickyphewitt.seamless.services", "com.rickyphewitt.emby.api"})
 @PropertySource({"classpath:application.properties"})
-@Import({ThymeleafConfig.class, Config.class, GsonConfig.class})
+@Import({Config.class, GsonConfig.class})
 public class SeamlessServicesConfig {}
