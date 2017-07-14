@@ -4,48 +4,9 @@
 *
 */
 
-/* Global Vars */
-// Urls
-// var basePlayUrl = "/play";
-// var basePlayQueueUrl = basePlayUrl + "/queue";
-// var playNextUrl = basePlayQueueUrl + "/next";
-// var playPrevUrl = basePlayQueueUrl + "/prev";
-// var playSongUrl = basePlayQueueUrl + "/song/";
-// var playCurrentUrl = basePlayQueueUrl + "/playing"
-//
-// var playAlbumUrl = basePlayUrl + "/album/";
-//
-// // attributes
-// var queueLineSongIdAttr = "songId";
-// var albumIdAttr = "albumId";
-// var trackNumberAttr = "trackNumber";
-// var srcAttribute = "src";
-// var songNameAttr = "songName";
-//
-// // css ids
-// var appPlayerId = "#player";
-// var nextId = "#controlsNext";
-// var prevId = "#controlsPrev";
-// var playId = "#controlsPlay";
-// var playingSongName = "#playingSongName";
-// var playingSongArtistName = "#playingSongArtistName";
-// var playingSongAlbumName = "#playingSongAlbumName";
-// var activeArtistName = "#artistName";
-// var activeAlbumName = "#albumName";
-//
-// // css classes
-// var nowPlayingQueueItemClass = "nowPlayingQueueItem";
-// var nowPlayingQueueSongClass = "playSong";
-// var nowPlayingHighlightClass = "bg-primary";
-// var albumPlayClass = "albumPlay";
-// // fully qualified css classes
-// var nowPlayingQueueItemClassFQ = "." + nowPlayingQueueItemClass;
-// var nowPlayingQueueSongClassFQ = "."+ nowPlayingQueueSongClass;
-// var albumPlayClassFQ = "."+ albumPlayClass;
-
 /* Glyphicon classes */
-var playGlyph = "glyphicon-play";
-var pauseGlyph = "glyphicon-pause";
+//var playGlyph = "glyphicon-play";
+//var pauseGlyph = "glyphicon-pause";
 
 /* Global instances */
 var playerDomElement = $(appPlayerId);
@@ -92,7 +53,6 @@ function setNowPlayingQueueItem(playedElement) {
 }
 
 function play() {
-    console.log(player);
 	if(player.paused) {
 		player.play();
         setPlayPauseImg(PAUSE_IMG);
@@ -107,15 +67,18 @@ function setPlayPauseImg(IMG_SRC) {
 }
 
 function playSong(songId) {
+    setPlayPauseImg(PAUSE_IMG);
 	$(appPlayerId).attr(srcAttribute, playSongUrl + songId);
 }
 
 function playAlbum(albumId) {
+    setPlayPauseImg(PAUSE_IMG);
 	$(appPlayerId).attr(srcAttribute, playAlbumUrl + albumId);
 
 }
 
 function playSongFromAlbum(albumId, trackNumber) {
+    setPlayPauseImg(PAUSE_IMG);
 	$(appPlayerId).attr(srcAttribute, playAlbumUrl + albumId + "/" + trackNumber);
 }
 

@@ -73,25 +73,6 @@ $(function() {
         toggleMenu();
     })
 
-	// $(artistsTab).click(function(){
-	// 	navGoTo(homeUrl);
-	// })
-	// $(albumsTab).click(function(){
-	// 	navGoTo(albumsUrl);
-	// })
-	// $(genresTab).click(function(){
-	// 	navGoTo(genresUrl);
-	// })
-	// $(playlistsTab).click(function(){
-	// 	navGoTo(playlistsUrl);
-	// })
-	// $(favoritesTab).click(function(){
-	// 	navGoTo(favoritesUrl);
-	// })
-	// $(settingsTab).click(function(){
-	// 	navGoTo(settingsUrl);
-	// })
-
 	// opens now playing queue
 	$(appQueue).click(function(){
 		$(mainContent).load(nowPlayingQueueUrl, function(){
