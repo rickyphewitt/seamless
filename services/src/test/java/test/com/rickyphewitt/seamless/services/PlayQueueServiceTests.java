@@ -1,7 +1,9 @@
 package test.com.rickyphewitt.seamless.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.rickyphewitt.emby.api.data.Song;
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.services.PlayQueueService;
 
 import test.com.rickyphewitt.seamless.services.config.TestConfig;
@@ -25,24 +26,25 @@ public class PlayQueueServiceTests {
 	PlayQueueService playQueueService;
 	
 	
+	
+	
 	@Test
 	public void initPlayQueueAndIndexes() {
 
 		// Data setup
-		SongSet songs = songSetup();
+		List<Song> songs = setupSongs(2);
 		playQueueService.setPlayQueue(songs);
 		
-		playQueueService.setPlayQueue(songs);
-		Assert.assertTrue(playQueueService.getIndexes().size() == songs.getItems().size());
+		Assert.assertTrue(playQueueService.getIndexes().size() == songs.size());
 		Assert.assertTrue(playQueueService.getCurrentIndex() == 0);
 	}
 	
 	
 	@Test
-	public void nextSong() {
+	public void nextSong_forceWrapping() {
 	
 		// Data setup
-		SongSet songs = songSetup();
+		List<Song> songs = setupSongs(2);
 		playQueueService.setPlayQueue(songs);
 		
 		// Next
@@ -55,10 +57,10 @@ public class PlayQueueServiceTests {
 	}
 
 	@Test
-	public void prevSong() {
+	public void prevSong_forceWrapping() {
 
 		// Data setup
-		SongSet songs = songSetup();
+		List<Song> songs = setupSongs(2);
 		playQueueService.setPlayQueue(songs);
 		
 		// prev forcing loop
@@ -71,17 +73,38 @@ public class PlayQueueServiceTests {
 	}
 	
 	
-	private SongSet songSetup() {
-		Song firstSong = SongTestHelper.createSong("1", "awesomeSong");
-		Song SecondSong = SongTestHelper.createSong("2", "awesomeSong2");
+	@Test
+	public void nextPrevSong_largerQueue() {
+		List<Song> songs = setupSongs(10);
+		Map<Integer, Song> songIndexes= new HashMap<Integer, Song>();
+		for(int i = 0; i < songs.size(); i ++) {
+			songIndexes.put(i, songs.get(i));
+		}
 		
+		playQueueService.setPlayQueue(songs);
 		
-		SongSet songs = new SongSet();
-		List<Song> items = new ArrayList<Song>();
-		items.add(firstSong);
-		items.add(SecondSong);
-		songs.setItems(items);
+		// Next
+		playQueueService.next();
+		Assert.assertTrue(playQueueService.getCurrentIndex() == 1);
 		
+		playQueueService.next();
+		Assert.assertTrue(playQueueService.getCurrentIndex() == 2);
+		
+		playQueueService.next();
+		Assert.assertTrue(playQueueService.getCurrentIndex() == 3);
+				
+		// Prev
+		playQueueService.prev();
+		Assert.assertTrue(playQueueService.getCurrentIndex() == 2);
+		
+	}
+	
+	// helper methods
+	private List<Song> setupSongs(int songsToCreate) {
+		List<Song> songs = new ArrayList<Song>();
+		for(int i = 0; i < songsToCreate; i++) {
+			songs.add(SongTestHelper.createRandomSong());
+		}
 		return songs;
 	}
 

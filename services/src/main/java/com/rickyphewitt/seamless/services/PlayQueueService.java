@@ -1,32 +1,37 @@
 package com.rickyphewitt.seamless.services;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.rickyphewitt.emby.api.data.Song;
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.seamless.data.Song;
+
+
 
 @Service
 public class PlayQueueService {
 
-	private ArrayList<Song> playQueue;
+	private Map<Integer, Song> playQueue;
 	private HashSet<Integer> indexes;
 	private Integer currentIndex;
 	
 	public PlayQueueService() {
-		playQueue = new ArrayList<Song>();
 		indexes = new HashSet<Integer>();
 		currentIndex = 0;
 	}
 	
 
 	public void next(){
+		System.out.println("current index: " + currentIndex);
 		currentIndex += 1;
 		if(isOutOfBounds(currentIndex)) {
 			wrapToBeginning();
 		}
+		
+		System.out.println("current index after update: " + currentIndex);
 	}
 	
 	public void prev(){
@@ -62,31 +67,24 @@ public class PlayQueueService {
 	
 	
 	// Getters/Setters
-	public void setPlayQueue(SongSet songs) {
-		playQueue.clear();
-		for(Song s: songs.getItems()) {
-			playQueue.add(s);
+	public void setPlayQueue(List<Song> songs) {
+		playQueue = new HashMap<Integer, Song>();
+		for(int i = 0; i < songs.size(); i ++) {
+			playQueue.put(i, songs.get(i));
 		}
 		setIndexes(playQueue.size());
+		currentIndex = 0;
 	}
 	
-	public void setPlayQueue(SongSet songs, int playingItemNumber) {
-		playQueue.clear();
-		for(Song s: songs.getItems()) {
-			playQueue.add(s);
+	public void setPlayQueue(List<Song> songs, int playingItemNumber) {
+		playQueue = new HashMap<Integer, Song>();
+		for(int i = 0; i < songs.size(); i ++) {
+			playQueue.put(i, songs.get(i));
 		}
 		setIndexes(playQueue.size());
 		currentIndex = playingItemNumber;
 	}
-	
-	public void add(Song song) {
-		playQueue.add(song);
-	}
-	
-	public void remove(int index) {
-		playQueue.remove(index);
-		
-	}
+
 
 	public void setIndexes(int sizeOfIndexes) {
 		indexes.clear();
@@ -95,12 +93,13 @@ public class PlayQueueService {
 		}
 	}	
 	
-	public ArrayList<Song> getPlayQueue() {
+	public Map<Integer, Song> getPlayQueue() {
 		return playQueue;
 	}
-	public void setPlayQueue(ArrayList<Song> playQueue) {
+	public void setPlayQueue(Map<Integer, Song> playQueue) {
 		this.playQueue = playQueue;
 		setIndexes(playQueue.size());
+		
 	}
 	
 	

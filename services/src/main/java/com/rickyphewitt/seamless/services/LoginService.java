@@ -8,6 +8,7 @@ import com.rickyphewitt.emby.api.data.PublicServerInfo;
 import com.rickyphewitt.emby.api.data.User;
 import com.rickyphewitt.emby.api.data.UserSet;
 import com.rickyphewitt.seamless.data.Server;
+import com.rickyphewitt.seamless.data.exceptions.ConnectionException;
 import com.rickyphewitt.seamless.services.constants.UrlConstants;
 
 @Service
@@ -20,7 +21,11 @@ public class LoginService {
 	ServerService serverService;
 	
 	@Autowired
-	FragmentService fragmentService;
+	Aggregator aggregatorService;
+	
+	public void login() throws ConnectionException {
+		aggregatorService.login();
+	}
 	
 	public void login(User user, String password) throws Exception {
 		AuthenticationResult authResult = apiService.login(user.getName(), password);

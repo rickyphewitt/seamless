@@ -1,5 +1,7 @@
 package com.rickyphewitt.seamless.web;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class HomeController {
 	HomeService homeService;
 	
 	@RequestMapping("/home")
-	String music(Model model, HttpServletResponse response) {
+	String music(Model model, HttpServletResponse response) throws InterruptedException, ExecutionException {
 		return homeService.home(model, response);
 	}
 }

@@ -11,5 +11,7 @@ import com.rickyphewitt.emby.api.services.config.GsonConfig;
 @Configuration
 @ComponentScan({"com.rickyphewitt.seamless.services", "com.rickyphewitt.emby.api"})
 @PropertySource({"classpath:application.properties"})
-@Import({Config.class, GsonConfig.class})
+@Import({Config.class,
+	GsonConfig.class,
+	ThreadPoolConfig.class})
 public class SeamlessServicesConfig {}

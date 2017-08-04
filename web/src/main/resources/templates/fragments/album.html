@@ -9,11 +9,11 @@
 	                <td class="mediumPadding queueTd" th:text="${iter.index}">1</td>
 	                <td class="mediumPadding queueTd" th:text="${song.name}">Adelaide</td>
 	                <td class="mediumPadding queueTd" th:text="${artist.name}">Anberlin</td>
-	                <td class="mediumPadding queueTd" th:text="${song.runTimeTicks}">3:30</td>
+	                <td class="mediumPadding queueTd" th:text="${song.duration}">3:30</td>
 	                <td class="mediumPadding queueTd">favorite</td>
 	                <td class="mediumPadding queueTd appPlaySong"
-						data-th-attr="entityId=${song.Id},
-									albumId=${album.Id},
+						data-th-attr="entityId=${song.mediaId},
+									albumId=${album.mediaId},
         							trackNumber=${iter.index},
         							songName=${song.Name}">></td>
 	                <td class="mediumPadding queueTd">>+</td>

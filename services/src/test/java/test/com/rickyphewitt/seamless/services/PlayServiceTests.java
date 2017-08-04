@@ -3,9 +3,11 @@ package test.com.rickyphewitt.seamless.services;
 
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,13 +20,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.rickyphewitt.emby.api.data.Song;
-import com.rickyphewitt.emby.api.data.SongSet;
-import com.rickyphewitt.seamless.services.ApiService;
+import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.services.PlayService;
+import com.rickyphewitt.seamless.services.SongService;
 import com.rickyphewitt.seamless.services.publishers.PlayEventPublisher;
 
 import test.com.rickyphewitt.seamless.services.config.TestConfig;
+import test.com.rickyphewitt.seamless.services.helpers.SongTestHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
@@ -35,7 +37,7 @@ public class PlayServiceTests {
 	PlayService playService;
 	
 	@Mock
-	ApiService loginService;
+	SongService songService;
 	
 	@Mock
 	PlayEventPublisher playEventPublisher;
@@ -52,11 +54,12 @@ public class PlayServiceTests {
 		// data setup
 		byte[] someBytes = new byte[100];
 		String albumId = "randoAlbumId";
-		SongSet songs = setupSongSet();
+		List<Song> songs = setupSongs();
 		
-		Mockito.doNothing().when(playEventPublisher).setQueue(any(SongSet.class));
-		when(loginService.getSongsFromAlbum(any(String.class))).thenReturn(songs);
-		when(loginService.getSong(any(String.class))).thenReturn(someBytes);
+		Mockito.doNothing().when(playEventPublisher).setQueue(Mockito.anyListOf(Song.class));
+		doNothing().when(songService).loadSongs(any(String.class));
+		when(songService.getSongs()).thenReturn(songs);
+		when(songService.playSong(any(String.class))).thenReturn(someBytes);
 	
 		
 		// perform request
@@ -67,14 +70,11 @@ public class PlayServiceTests {
 		
 	}
 	
-	private SongSet setupSongSet() {
-		String songId = "randosongId";
-		SongSet songs = new SongSet();
-		Song song = new Song();
-		song.setId(songId);
-		ArrayList<Song> songList = new ArrayList<Song>();
-		songList.add(song);
-		songs.setItems(songList);
+	private List<Song> setupSongs() {
+		List<Song> songs = new ArrayList<Song>();
+		for(int i = 0; i < 10; i++) {
+			songs.add(SongTestHelper.createRandomSong());
+		}
 		return songs;
 	}
 	

@@ -4,7 +4,7 @@
     <div th:fragment="artists" id="sidebarContent">
         <ul class="appContentList">
 	       <th:block th:each="artist : ${artists}">
-    	      <li class="appArtistNav" data-th-attr="entityId=${artist.id}"
+    	      <li class="appArtistNav" data-th-attr="entityId=${artist.mediaId}"
                     th:text="${artist.name}">
         	       Alesana
                </li>

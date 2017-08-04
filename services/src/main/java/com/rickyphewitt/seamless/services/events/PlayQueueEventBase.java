@@ -1,25 +1,27 @@
 package com.rickyphewitt.seamless.services.events;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationEvent;
 
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.seamless.data.Song;
 
 public abstract class PlayQueueEventBase extends ApplicationEvent {
 	
-	private SongSet songs;
+	private List<Song> songs;
 	private int playingItemNumber;
 	
-	public PlayQueueEventBase(Object source, SongSet songs, int playingItemNumber) {
+	public PlayQueueEventBase(Object source, List<Song> songs, int playingItemNumber) {
 		super(source);
 		this.songs = songs;
 		this.playingItemNumber = playingItemNumber;
 	}
 	
-	public SongSet getSongs() {
+	public List<Song> getSongs() {
 		return songs;
 	}
 
-	public void setSongs(SongSet songs) {
+	public void setSongs(List<Song> songs) {
 		this.songs = songs;
 	}
 

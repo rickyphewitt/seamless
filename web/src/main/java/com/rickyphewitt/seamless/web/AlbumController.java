@@ -1,18 +1,19 @@
 package com.rickyphewitt.seamless.web;
 
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rickyphewitt.emby.api.data.Album;
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.seamless.data.Album;
 import com.rickyphewitt.seamless.services.AlbumService;
 import com.rickyphewitt.seamless.services.ApiService;
 import com.rickyphewitt.seamless.services.ArtistService;
-import com.rickyphewitt.seamless.services.DisplayOrganizerService;
 import com.rickyphewitt.seamless.services.FragmentService;
+import com.rickyphewitt.seamless.services.SongService;
 
 @Controller
 public class AlbumController {
@@ -22,6 +23,9 @@ public class AlbumController {
 	
 	@Autowired
 	AlbumService albumService;
+	
+	@Autowired
+	SongService songService;
 	
 	@Autowired
 	ApiService loginService;
@@ -36,13 +40,13 @@ public class AlbumController {
 	}
 	
 	@RequestMapping("/album/{id}")
-	public String album(@PathVariable("id") String id, Model model) {
+	public String album(@PathVariable("id") String id, Model model) throws InterruptedException, ExecutionException {
 		albumService.setCurrentAlbumId(id);
-		Album album = albumService.getAlbums().get(id);
-		SongSet songs = loginService.getSongsFromAlbum(id);
-		model.addAttribute("artist", artistService.getArtists().get(artistService.getCurrentArtistId()));
+		Album album = albumService.getAlbumsMap().get(id);
+		songService.loadSongs(id);
+		model.addAttribute("artist", artistService.getArtistsMap().get(artistService.getCurrentArtistId()));
 		model.addAttribute("album", album);
-		model.addAttribute("songs", songs.getItems());
+		model.addAttribute("songs", songService.getSongs());
 		return fragmentService.getFragment("album");
 		
 		

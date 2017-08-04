@@ -1,36 +1,38 @@
 package com.rickyphewitt.seamless.services;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rickyphewitt.emby.api.data.SongSet;
+import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.services.publishers.PlayEventPublisher;
 
 @Service
 public class PlayService {
 
 	@Autowired
-	ApiService loginService;
+	SongService songService;
 	
 	@Autowired
 	PlayEventPublisher playEventPublisher;
 	
-	public byte[] playAlbum(String albumId, int startTrack) {
-		SongSet songs = loginService.getSongsFromAlbum(albumId);
+	public byte[] playAlbum(String albumId, int startTrack) throws InterruptedException, ExecutionException {
+		songService.loadSongs(albumId);
 		int baseZeroTrackNumber = toBaseZero(startTrack);
-		
-		// publish play event
+		List<Song> songs = songService.getSongs();
 		playEventPublisher.setQueue(songs, baseZeroTrackNumber);
-		
-		return playSong(songs.getItems().get(baseZeroTrackNumber).getId());
+		String songId = songs.get(baseZeroTrackNumber).getMediaId();
+		return songService.playSong(songId);
 	}
 	
-	public byte[] playQueueSong(String songId) {
-		return loginService.getSong(songId);
+	public byte[] playQueueSong(String songId) throws InterruptedException, ExecutionException {
+		return songService.playSong(songId);
 	}
 	
-	public byte[] playSong(String songId) {
-		return loginService.getSong(songId);
+	public byte[] playSong(String songId) throws InterruptedException, ExecutionException {
+		return songService.playSong(songId);
 		
 	}
 	

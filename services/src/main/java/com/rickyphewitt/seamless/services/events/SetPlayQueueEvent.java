@@ -1,6 +1,8 @@
 package com.rickyphewitt.seamless.services.events;
 
-import com.rickyphewitt.emby.api.data.SongSet;
+import java.util.List;
+
+import com.rickyphewitt.seamless.data.Song;
 
 public class SetPlayQueueEvent extends PlayQueueEventBase {
 
@@ -9,7 +11,7 @@ public class SetPlayQueueEvent extends PlayQueueEventBase {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SetPlayQueueEvent(Object source, SongSet songs, int playingItemNumber) {
+	public SetPlayQueueEvent(Object source, List<Song> songs, int playingItemNumber) {
 		super(source, songs, playingItemNumber);
 	}
 
