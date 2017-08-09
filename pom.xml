@@ -30,6 +30,7 @@
   		<bootstrap.webjar.version>3.3.7-1</bootstrap.webjar.version>
   		<jquery.webjar.version>3.2.0</jquery.webjar.version>
   		<jquery.ui.webjar.version>1.12.1</jquery.ui.webjar.version>
+  		<apache.commons.version>3.4</apache.commons.version>
   		<emby.api.version>0.0.1-SNAPSHOT</emby.api.version>
   	</properties>
   	
@@ -80,6 +81,11 @@
 	  			<artifactId>httpclient</artifactId>
 	  			<version>${apache.httpcomponents.version}</version>
 	  		</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache.commons.version}</version>
+			</dependency>
 	  		
 	  		<!-- Web Jars -->
 	  		<dependency>

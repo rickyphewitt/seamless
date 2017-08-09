@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rickyphewitt.seamless.data.Song;
+import com.rickyphewitt.seamless.data.exceptions.TrackDoesNotExistException;
 import com.rickyphewitt.seamless.services.PlayQueueService;
 import com.rickyphewitt.seamless.services.PlayService;
 
@@ -25,13 +26,13 @@ public class PlayController {
 	PlayQueueService playQueueService;
 	
 	@RequestMapping(value="/play/album/{id}", produces = MediaType.ALL_VALUE)
-	public @ResponseBody byte[] play(@PathVariable("id") String id, Model model) throws InterruptedException, ExecutionException {
+	public @ResponseBody byte[] play(@PathVariable("id") String id, Model model) throws InterruptedException, ExecutionException, TrackDoesNotExistException {
 		return playService.playAlbum(id, 1);
 	}
 
 	@RequestMapping(value="/play/album/{id}/{trackNumber}", produces = MediaType.ALL_VALUE)
 	public @ResponseBody byte[] play(@PathVariable("id") String id,
-			@PathVariable("trackNumber") int trackNumber, Model model) throws InterruptedException, ExecutionException {
+			@PathVariable("trackNumber") int trackNumber, Model model) throws InterruptedException, ExecutionException, TrackDoesNotExistException {
 		return playService.playAlbum(id, trackNumber);
 	}
 	

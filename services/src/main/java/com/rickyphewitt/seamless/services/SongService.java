@@ -3,6 +3,7 @@ package com.rickyphewitt.seamless.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,35 @@ public class SongService extends MediaServiceBase<Song> {
 	Aggregator aggregatorService;
 	
 	private List<Song> songs;
-	private HashMap<String, Song> SongsMap;
+	private HashMap<String, Song> songsById;
+	private Map<Integer, Song> songsByTrack;
+	private Map<String, Map<Integer, Song>> songsByAlbumByTrack;
 	private String currentSongId;
+	
+	public SongService() {
+		songsByAlbumByTrack = new HashMap<String, Map<Integer, Song>>();
+		songsById = new HashMap<String, Song>();
+		songsByTrack = new HashMap<Integer, Song>();
+	}
 	
 	
 	public void loadSongs(String albumId) throws InterruptedException, ExecutionException {
+		
 		List<Song> songs = aggregatorService.getSongsInAlbum(albumId);
 		this.songs = this.consolidate(songs);
 		this.songs.sort((Song o1, Song o2)->Integer.compare(o1.getTrackNumber(), o2.getTrackNumber()));
-		addSongsToMap(this.songs);
+		addSongsToMap(albumId);
 	}
 	
-	private void addSongsToMap(List<Song> songs) {
-		this.SongsMap = new HashMap<String, Song>();
+	
+	
+	private void addSongsToMap(String albumId) {
 		for(Song song: songs) {
-			this.SongsMap.put(song.getMediaId(), song);
+			songsById.put(song.getMediaId(), song);
+			songsByTrack.put(song.getTrackNumber(), song);
 		}
+		
+		songsByAlbumByTrack.put(albumId, songsByTrack);
 	}
 
 	/**
@@ -60,11 +74,11 @@ public class SongService extends MediaServiceBase<Song> {
 	}
 
 	public HashMap<String, Song> getSongsMap() {
-		return SongsMap;
+		return songsById;
 	}
 
 	public void setSongsMap(HashMap<String, Song> songsMap) {
-		SongsMap = songsMap;
+		songsById = songsMap;
 	}
 
 	public String getCurrentSongId() {
@@ -73,5 +87,29 @@ public class SongService extends MediaServiceBase<Song> {
 
 	public void setCurrentSongId(String currentSongId) {
 		this.currentSongId = currentSongId;
+	}
+
+
+
+	public HashMap<String, Song> getSongsById() {
+		return songsById;
+	}
+
+
+
+	public void setSongsById(HashMap<String, Song> songsById) {
+		this.songsById = songsById;
+	}
+
+
+
+	public Map<Integer, Song> getSongsByTrack() {
+		return songsByTrack;
+	}
+
+
+
+	public void setSongsByTrack(Map<Integer, Song> songsByTrack) {
+		this.songsByTrack = songsByTrack;
 	}
 }

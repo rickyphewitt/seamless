@@ -51,7 +51,7 @@ public class Aggregator {
 
 	}
 		
-	public ArrayList<Artist> getArtists() throws InterruptedException, ExecutionException {
+	public List<Artist> getArtists() throws InterruptedException, ExecutionException {
 		ArrayList<Artist> artists = new ArrayList<Artist>();
 		List<CompletableFuture<List<Artist>>> completableFutures = new ArrayList<CompletableFuture<List<Artist>>>();
 		for(AsyncSourceService source: this.sources) {
@@ -67,7 +67,7 @@ public class Aggregator {
 		return artists;
 	}
 	
-	public ArrayList<Album> getAlbumsByArtist(String artistId) throws InterruptedException, ExecutionException {
+	public List<Album> getAlbumsByArtist(String artistId) throws InterruptedException, ExecutionException {
 		ArrayList<Album> albums = new ArrayList<Album>();
 		
 		List<CompletableFuture<List<Album>>> completableFutures = new ArrayList<CompletableFuture<List<Album>>>();
@@ -83,7 +83,7 @@ public class Aggregator {
 		return albums;
 	}
 	
-	public ArrayList<Song> getSongsInAlbum(String albumId) throws InterruptedException, ExecutionException {
+	public List<Song> getSongsInAlbum(String albumId) throws InterruptedException, ExecutionException {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
 		List<CompletableFuture<List<Song>>> completableFutures = new ArrayList<CompletableFuture<List<Song>>>();

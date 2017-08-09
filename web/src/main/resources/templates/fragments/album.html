@@ -5,8 +5,8 @@
 	<div id="queue" class="verticleOverflow queue">
 	    <table class="queueTable largePadding">
 	        <tbody>
-	            <tr th:each="song,iter : ${songs}" class="appQueueTr">
-	                <td class="mediumPadding queueTd" th:text="${iter.index}">1</td>
+	            <tr th:each="song : ${songs}" class="appQueueTr">
+	                <td class="mediumPadding queueTd" th:text="${song.TrackNumber}">1</td>
 	                <td class="mediumPadding queueTd" th:text="${song.name}">Adelaide</td>
 	                <td class="mediumPadding queueTd" th:text="${artist.name}">Anberlin</td>
 	                <td class="mediumPadding queueTd" th:text="${song.duration}">3:30</td>
@@ -14,7 +14,7 @@
 	                <td class="mediumPadding queueTd appPlaySong"
 						data-th-attr="entityId=${song.mediaId},
 									albumId=${album.mediaId},
-        							trackNumber=${iter.index},
+        							trackNumber=${song.TrackNumber},
         							songName=${song.Name}">></td>
 	                <td class="mediumPadding queueTd">>+</td>
 	                <td class="mediumPadding queueTd">+</td>
