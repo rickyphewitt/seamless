@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.rickyphewitt.seamless.data.Song;
+import com.rickyphewitt.seamless.services.config.CachingConfig;
 
 @Service
 public class SongService extends MediaServiceBase<Song> {

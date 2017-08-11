@@ -13,5 +13,6 @@ import com.rickyphewitt.emby.api.services.config.GsonConfig;
 @PropertySource({"classpath:application.properties"})
 @Import({Config.class,
 	GsonConfig.class,
-	ThreadPoolConfig.class})
+	ThreadPoolConfig.class,
+	CachingConfig.class})
 public class SeamlessServicesConfig {}

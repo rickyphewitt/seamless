@@ -32,6 +32,7 @@
   		<jquery.ui.webjar.version>1.12.1</jquery.ui.webjar.version>
   		<apache.commons.version>3.4</apache.commons.version>
   		<emby.api.version>0.0.1-SNAPSHOT</emby.api.version>
+  		<google.guava.version>23.0</google.guava.version>
   	</properties>
   	
   	<dependencyManagement>  	
@@ -74,6 +75,14 @@
 	  			<artifactId>gson</artifactId>
 	  			<version>${gson.version}</version>
 	  		</dependency>
+	  		
+	  		<!-- Guava caching -->
+	  		<dependency>
+	  			<groupId>com.google.guava</groupId>
+	  			<artifactId>guava</artifactId>
+	  			<version>${google.guava.version}</version>
+	  		</dependency>
+	  		
 	  		
 	  		<!-- Apache -->
 	  		<dependency>

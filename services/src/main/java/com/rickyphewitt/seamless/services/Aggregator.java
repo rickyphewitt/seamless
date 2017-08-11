@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.rickyphewitt.seamless.data.Album;
@@ -14,6 +15,7 @@ import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.data.enums.IdSource;
 import com.rickyphewitt.seamless.data.exceptions.ConnectionException;
 import com.rickyphewitt.seamless.data.sources.WebApiSource;
+import com.rickyphewitt.seamless.services.config.CachingConfig;
 import com.rickyphewitt.seamless.services.sources.AsyncSourceService;
 import com.rickyphewitt.seamless.services.sources.emby.EmbyService;
 
@@ -50,7 +52,7 @@ public class Aggregator {
 		
 
 	}
-		
+	@Cacheable(CachingConfig.ARTIST_CACHE)
 	public List<Artist> getArtists() throws InterruptedException, ExecutionException {
 		ArrayList<Artist> artists = new ArrayList<Artist>();
 		List<CompletableFuture<List<Artist>>> completableFutures = new ArrayList<CompletableFuture<List<Artist>>>();
@@ -67,6 +69,7 @@ public class Aggregator {
 		return artists;
 	}
 	
+	@Cacheable(CachingConfig.ALBUM_CACHE)
 	public List<Album> getAlbumsByArtist(String artistId) throws InterruptedException, ExecutionException {
 		ArrayList<Album> albums = new ArrayList<Album>();
 		
@@ -83,6 +86,7 @@ public class Aggregator {
 		return albums;
 	}
 	
+	@Cacheable(CachingConfig.SONG_CACHE)
 	public List<Song> getSongsInAlbum(String albumId) throws InterruptedException, ExecutionException {
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
@@ -98,6 +102,7 @@ public class Aggregator {
 		return songs;
 	}
 	
+	@Cacheable(CachingConfig.RAW_SONG_CACHE)
 	public byte[] playSong(String songId) throws InterruptedException, ExecutionException {
 		
 		List<CompletableFuture<byte[]>> completableFutures = new ArrayList<CompletableFuture<byte[]>>();
