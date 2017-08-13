@@ -7,22 +7,32 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.rickyphewitt.seamless.data.Song;
+import com.rickyphewitt.seamless.services.events.PlaySongEvent;
 import com.rickyphewitt.seamless.services.events.SetPlayQueueEvent;
 
 @Component
 public class PlayEventPublisher {
 
-	@Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
- 
+	private final ApplicationEventPublisher publisher;
+	
+	public PlayEventPublisher(ApplicationEventPublisher publisher){
+		 this.publisher = publisher;
+	}
+	
     public void setQueue(List<Song> songs) {
         SetPlayQueueEvent setQueueEvent = new SetPlayQueueEvent(this, songs, 0);
-        applicationEventPublisher.publishEvent(setQueueEvent);
+        publisher.publishEvent(setQueueEvent);
     }
     
     public void setQueue(List<Song> songs, int playingItemNumber) {
         SetPlayQueueEvent setQueueEvent = new SetPlayQueueEvent(this, songs, playingItemNumber);
-        applicationEventPublisher.publishEvent(setQueueEvent);
+        publisher.publishEvent(setQueueEvent);
+    }
+    
+    
+    public void playSong(String songId) {
+    	PlaySongEvent playSongEvent = new PlaySongEvent(this, songId);
+    	publisher.publishEvent(playSongEvent);
     }
     
 }

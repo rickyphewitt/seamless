@@ -41,7 +41,14 @@ public class PlayQueueService {
 		}
 	}
 	
-	private boolean isOutOfBounds(Integer index) {
+	/**
+	 * Determines if the incoming index in an 
+	 * index out of bounds error
+	 * 
+	 * @param index
+	 * @return index is out of bounds
+	 */
+	public boolean isOutOfBounds(Integer index) {
 		boolean isOutOfBounds = false;
 		if(index < 0 || index >= indexes.size()) {
 			isOutOfBounds = true;

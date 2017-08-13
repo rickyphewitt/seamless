@@ -32,14 +32,15 @@ public class PlayService {
 			throw new TrackDoesNotExistException(issue);
 		}
 		String songId = songsByTrack.get(startTrack).getMediaId();
-		return songService.playSong(songId);
+		return this.playSong(songId);
 	}
 	
 	public byte[] playQueueSong(String songId) throws InterruptedException, ExecutionException {
-		return songService.playSong(songId);
+		return this.playSong(songId);
 	}
 	
 	public byte[] playSong(String songId) throws InterruptedException, ExecutionException {
+		playEventPublisher.playSong(songId);
 		return songService.playSong(songId);
 		
 	}

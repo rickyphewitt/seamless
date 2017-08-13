@@ -14,5 +14,6 @@ import com.rickyphewitt.emby.api.services.config.GsonConfig;
 @Import({Config.class,
 	GsonConfig.class,
 	ThreadPoolConfig.class,
-	CachingConfig.class})
+	CachingConfig.class,
+	EventConfig.class})
 public class SeamlessServicesConfig {}

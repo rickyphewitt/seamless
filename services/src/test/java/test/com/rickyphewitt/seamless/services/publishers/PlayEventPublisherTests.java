@@ -32,11 +32,14 @@ public class PlayEventPublisherTests {
 	PlayQueueService playQueueService;
 	
 	@Test
-	public void setPlayQueue() {
+	public void setPlayQueue() throws InterruptedException {
 		
 		List<Song> songs = setupSongs();
 		
 		playEventPublisher.setQueue(songs);
+		
+		//@ToDo: wait until async process has completed instead of waiting n seconds
+		Thread.sleep(1000);
 		
 		Assert.assertEquals(songs.size(), playQueueService.getPlayQueue().size());
 		
