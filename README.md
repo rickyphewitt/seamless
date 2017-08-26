@@ -27,3 +27,6 @@ Seamless aims to blend all sources of music into a single interface
 ## Thinking of contributing... awesome!
 Here are a few things to consider
 * CSS/HTML attributes that start with **app** are NOT to be used for syles. These are used only for JS click events talking to the Java backend
+
+# License
+This project is licensed under the GPLv2. See https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
