@@ -63,6 +63,20 @@ function setActive(attribute, value) {
     $(appActiveInfo).attr(attribute, value);
 }
 
+
+function filterArtists(filterBy) {
+    $(artistNavMenuItem).each(function(index, value){
+        if(filterBy == '') {
+            $(this).show();
+        }
+        if($(this).text().toLowerCase().indexOf(filterBy.toLowerCase()) !== -1) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    })
+}
+
 /* Footer Nav */
 
 
@@ -71,7 +85,7 @@ $(function() {
 	// onclick nav events
     $(hamNav).click(function() {
         toggleMenu();
-    })
+    });
 
 	// opens now playing queue
 	$(appQueue).click(function(){
@@ -85,5 +99,10 @@ $(function() {
 	 $(artistNavMenuItem).click(function() {
 		  goToArtist($(this));
 	  });
+
+	// filter for artists
+	$(search).on("input", function(){
+        filterArtists($(this).val());
+	});
 
 });

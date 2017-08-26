@@ -43,6 +43,7 @@ var navContentList = classAttrKey + "ContentList";
 var navMenuList = classAttrKey + "MenuList";
 var artistNavMenuItem = classAttrKey + "ArtistNav";
 var album = classAttrKey + "Album";
+var search = idAttrKey + "Search"
 
 
 
