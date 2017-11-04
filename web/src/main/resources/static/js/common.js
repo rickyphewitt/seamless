@@ -74,8 +74,9 @@ var playPrevUrl = basePlayQueueUrl + "/prev";
 var playSongUrl = basePlayQueueUrl + "/song/";
 var playCurrentUrl = basePlayQueueUrl + "/playing"
 
+var playArtistUrl = basePlayUrl + "/artist/";
 var playAlbumUrl = basePlayUrl + "/album/";
-
+var shuffleUrl = "/shuffle";
 // queue
 var appQueue = idAttrKey + "Queue";
 var appQueueRow = classAttrKey + "QueueTr";
@@ -86,6 +87,7 @@ var albumIdAttr = "albumId";
 var trackNumberAttr = "trackNumber";
 var srcAttribute = "src";
 var songNameAttr = "songName";
+var appActionAttr = attrKey + "Action";
 
 var appPlayerId = idAttrKey + "Player";
 var appNextId = idAttrKey + "Next";
@@ -100,12 +102,14 @@ var appActiveSongName = "song";
 var appActiveInfo = idAttrKey + "ActiveInfo";
 var appVolumeSlider = idAttrKey + "Volume";
 var appNowPlayingSlider = idAttrKey + "NowPlayingTime";
+var appGroupPlay = idAttrKey + "GroupPlay";
+var appGroupShuffle = idAttrKey + "GroupShuffle";
+var appGroupMix = idAttrKey + "GroupMix";
+
 // css classes
 var nowPlayingQueueItemClass = "nowPlayingQueueItem";
 var nowPlayingQueueSongClass = classAttrKey + "PlaySong";
 var nowPlayingHighlightClass = "bg-primary";
 var albumPlayClass = "albumPlay";
 // fully qualified css classes
-//var nowPlayingQueueItemClassFQ = "." + nowPlayingQueueItemClass;
-//var nowPlayingQueueSongClassFQ = "."+ nowPlayingQueueSongClass;
 var albumPlayClassFQ = "."+ albumPlayClass;

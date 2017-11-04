@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.rickyphewitt.seamless.data.Config;
 import com.rickyphewitt.seamless.data.enums.IdSource;
 import com.rickyphewitt.seamless.data.sources.WebApiSource;
 
@@ -13,8 +14,7 @@ import com.rickyphewitt.seamless.data.sources.WebApiSource;
 public class SourceConfigService {
 
 	// Attributes
-	HashMap<IdSource, List<WebApiSource>> webSources;
-	
+	private HashMap<IdSource, List<WebApiSource>> webSources;	
 	
 	public SourceConfigService() {
 		this.readConfig();
@@ -24,7 +24,7 @@ public class SourceConfigService {
 	private void readConfig() {
 		//@ToDo: read user config file
 		WebApiSource embySource = new WebApiSource("Emby1", IdSource.EMBY);
-		embySource.setUsername("username");
+		embySource.setUsername("username1");
 		embySource.setPassword("da39a3ee5e6b4b0d3255bfef95601890afd80709");
 		embySource.setUrl("http://emby:8096");
 		this.addWebSources(IdSource.EMBY, embySource);
@@ -63,7 +63,6 @@ public class SourceConfigService {
 			this.webSources.put(source, newSource);
 		}
 	}
-	
 	
 	
 }

@@ -35,7 +35,17 @@ public class PlayController {
 			@PathVariable("trackNumber") int trackNumber, Model model) throws InterruptedException, ExecutionException, TrackDoesNotExistException {
 		return playService.playAlbum(id, trackNumber);
 	}
-	
+
+	@RequestMapping(value="/play/album/{id}/shuffle", produces = MediaType.ALL_VALUE)
+	public @ResponseBody byte[] shuffleAlbum(@PathVariable("id") String id, Model model) throws ExecutionException, InterruptedException {
+		return playService.shuffleAlbum(id);
+	}
+
+	@RequestMapping(value="/play/artist/{id}/shuffle", produces = MediaType.ALL_VALUE)
+	public @ResponseBody byte[] shuffleArtist(@PathVariable("id") String id, Model model) throws ExecutionException, InterruptedException {
+		return playService.shuffleArtist(id);
+	}
+
 	@RequestMapping(value="/play/queue/song/{id}", produces = MediaType.ALL_VALUE)
 	public @ResponseBody byte[] playQueueSong(@PathVariable("id") String id, Model model) throws InterruptedException, ExecutionException {
 		return playService.playQueueSong(id);
@@ -58,5 +68,6 @@ public class PlayController {
 	public  @ResponseBody String getQueuePlaying() {
 		return playQueueService.getPlayQueue().get(playQueueService.getCurrentIndex()).getMediaId();
 	}
+
 	
 }

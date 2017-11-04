@@ -31,13 +31,24 @@ public class SongService extends MediaServiceBase<Song> {
 		songsByTrack = new HashMap<Integer, Song>();
 	}
 	
-	
+
+	@Deprecated
 	public void loadSongs(String albumId) throws InterruptedException, ExecutionException {
-		
+
 		List<Song> songs = aggregatorService.getSongsInAlbum(albumId);
 		this.songs = this.consolidate(songs);
 		this.songs.sort((Song o1, Song o2)->Integer.compare(o1.getTrackNumber(), o2.getTrackNumber()));
 		addSongsToMap(albumId);
+	}
+
+	public void loadSongs(List<String> albumIds) throws ExecutionException, InterruptedException {
+		List<Song> songs = new ArrayList<>();
+		for(String albumId: albumIds) {
+			songs.addAll(aggregatorService.getSongsInAlbum(albumId));
+			this.songs = this.consolidate(songs);
+			this.songs.sort((Song o1, Song o2)->Integer.compare(o1.getTrackNumber(), o2.getTrackNumber()));
+			addSongsToMap(albumId);
+		}
 	}
 	
 	

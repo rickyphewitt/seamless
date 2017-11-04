@@ -40,6 +40,7 @@ function goToArtist(artist) {
         setMainHeading(artist.text());
         accentArtist(artist);
         setActive(appActiveArtistName, artist.text());
+        setGroupActions(artistClass, artist.attr(entityId));
         //loadAlbumPlayJs();
 		 // open album
 		 $(album).click(function() {
@@ -55,12 +56,36 @@ function goToAlbum(album) {
 	$(mainContent).load(albumUrl +"/"+ album.attr(entityId), function() {
         setMainHeading(album.text())
         setActive(appActiveAlbumName, album.text());
+        setGroupActions(albumClass, album.attr(entityId));
         loadAlbumSongPlayJs();
 	});
 }
 
 function setActive(attribute, value) {
     $(appActiveInfo).attr(attribute, value);
+}
+
+function setGroupActions(groupType, mediaId) {
+
+    action = ''
+    switch(groupType) {
+        case artistClass:
+        action = getGroupActionArtist(mediaId)
+        break;
+        case albumClass:
+        action = getGroupActionAlbum(mediaId)
+        break;
+    }
+
+    $(appGroupShuffle).attr(appActionAttr, action);
+}
+
+function getGroupActionArtist(mediaId) {
+    return playArtistUrl + mediaId + shuffleUrl
+}
+
+function getGroupActionAlbum(mediaId) {
+    return playAlbumUrl + mediaId + shuffleUrl
 }
 
 

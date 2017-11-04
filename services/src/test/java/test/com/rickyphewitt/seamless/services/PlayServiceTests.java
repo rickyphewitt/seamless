@@ -155,5 +155,21 @@ public class PlayServiceTests {
 		verify(songService, times(1)).playSong(songsByTrack.get(4).getMediaId());
 		
 	}
+
+	@Test
+	public void playShuffle() throws ExecutionException, InterruptedException {
+		// data setup
+		String albumId = "randoAlbumId";
+		List<Song> songsInAlbum = SongTestHelper.createRandomSongsInAlbum(10, null);
+		Map<Integer, Song> songsByTrack = SongTestHelper.songsByTrackNumber(songsInAlbum);
+
+		// mocks
+		when(songService.getSongs()).thenReturn(songsInAlbum);
+		when(songService.playSong(any(String.class))).thenReturn(someBytes);
+		when(songService.getSongsByTrack()).thenReturn(songsByTrack);
+
+		// perform request
+		byte[] bytes = playService.shuffleAlbum(albumId);
+	}
 	
 }

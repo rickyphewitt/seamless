@@ -71,6 +71,12 @@ function playSong(songId) {
 	$(appPlayerId).attr(srcAttribute, playSongUrl + songId);
 }
 
+
+function playShuffle() {
+    setPlayPauseImg(PAUSE_IMG);
+    $(appPlayerId).attr(srcAttribute, $(appGroupShuffle).attr(appActionAttr));
+}
+
 function playAlbum(albumId) {
     setPlayPauseImg(PAUSE_IMG);
 	$(appPlayerId).attr(srcAttribute, playAlbumUrl + albumId);
@@ -157,4 +163,8 @@ $(function() {
 	  });
       initVolumeSilder();
       initNowPlayingSlider();
+	  $(appGroupShuffle).click(function() {
+	    playShuffle();
+	  });
+
 	});

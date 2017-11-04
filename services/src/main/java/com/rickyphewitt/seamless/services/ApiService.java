@@ -1,19 +1,12 @@
 package com.rickyphewitt.seamless.services;
 
 
-
+import com.rickyphewitt.emby.api.data.*;
+import com.rickyphewitt.emby.api.services.clients.ApiV1Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
-
-import com.rickyphewitt.emby.api.data.AlbumSet;
-import com.rickyphewitt.emby.api.data.ArtistSet;
-import com.rickyphewitt.emby.api.data.AuthenticationResult;
-import com.rickyphewitt.emby.api.data.PublicServerInfo;
-import com.rickyphewitt.emby.api.data.SongSet;
-import com.rickyphewitt.emby.api.data.UserSet;
-import com.rickyphewitt.emby.api.services.clients.ApiV1Client;
 
 @Service
 public class ApiService {

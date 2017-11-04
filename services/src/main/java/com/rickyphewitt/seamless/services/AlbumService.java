@@ -37,6 +37,7 @@ public class AlbumService extends MediaServiceBase<Album> {
 		}
 	}
 
+
 	// Getters/Setters
 	public List<Album> getAlbums() {
 		return albums;
