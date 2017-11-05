@@ -36,8 +36,16 @@
 	  			<groupId>com.rickyphewitt.emby.api</groupId>
 	  			<artifactId>services</artifactId>
   			</dependency>
-  			
-  		
+
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+			</dependency>
   		
 	  		<!-- Gson -->
 	  		<dependency>

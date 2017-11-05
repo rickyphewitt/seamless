@@ -33,6 +33,8 @@
   		<apache.commons.version>3.4</apache.commons.version>
   		<emby.api.version>0.0.1-SNAPSHOT</emby.api.version>
   		<google.guava.version>23.0</google.guava.version>
+		<apache.log4j.version>2.9.1</apache.log4j.version>
+		<jackson.verson>2.6.3</jackson.verson>
   	</properties>
   	
   	<dependencyManagement>  	
@@ -94,6 +96,34 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${apache.commons.version}</version>
+			</dependency>
+
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${apache.log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${apache.log4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.verson}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.verson}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.verson}</version>
 			</dependency>
 	  		
 	  		<!-- Web Jars -->

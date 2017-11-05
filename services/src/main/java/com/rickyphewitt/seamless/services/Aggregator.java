@@ -1,14 +1,5 @@
 package com.rickyphewitt.seamless.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import com.rickyphewitt.seamless.data.Album;
 import com.rickyphewitt.seamless.data.Artist;
 import com.rickyphewitt.seamless.data.Song;
@@ -18,11 +9,23 @@ import com.rickyphewitt.seamless.data.sources.WebApiSource;
 import com.rickyphewitt.seamless.services.config.CachingConfig;
 import com.rickyphewitt.seamless.services.sources.AsyncSourceService;
 import com.rickyphewitt.seamless.services.sources.emby.EmbyService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 @Service
 public class Aggregator {
-	
+
+	private static Logger logger = LogManager.getLogger();
+
 	//attributes
 	// @ToDo split out artist/album/song storage from this class
 	private ArrayList<AsyncSourceService> sources;
@@ -41,6 +44,7 @@ public class Aggregator {
 	 * @throws ConnectionException
 	 */
 	public void login() throws ConnectionException {
+		logger.info("Attempting to log into sources");
 		sources = new ArrayList<AsyncSourceService>();
 		for(IdSource source: sourceConfigService.getWebSources().keySet()) {
 			for(WebApiSource sourceConfig: sourceConfigService.getWebSources().get(source)) {
@@ -52,8 +56,9 @@ public class Aggregator {
 		
 
 	}
-	@Cacheable(CachingConfig.ARTIST_CACHE)
+	@Cacheable(value = CachingConfig.ARTIST_CACHE, unless ="#result.size() == 0")
 	public List<Artist> getArtists() throws InterruptedException, ExecutionException {
+		logger.info("Cache Miss! Requesting Artists from services");
 		ArrayList<Artist> artists = new ArrayList<Artist>();
 		List<CompletableFuture<List<Artist>>> completableFutures = new ArrayList<CompletableFuture<List<Artist>>>();
 		for(AsyncSourceService source: this.sources) {
@@ -69,8 +74,9 @@ public class Aggregator {
 		return artists;
 	}
 	
-	@Cacheable(CachingConfig.ALBUM_CACHE)
+	@Cacheable(value = CachingConfig.ALBUM_CACHE, unless ="#result.size() == 0")
 	public List<Album> getAlbumsByArtist(String artistId) throws InterruptedException, ExecutionException {
+		logger.info("Cache Miss! Requesting Albums from services");
 		ArrayList<Album> albums = new ArrayList<Album>();
 		
 		List<CompletableFuture<List<Album>>> completableFutures = new ArrayList<CompletableFuture<List<Album>>>();
@@ -86,8 +92,9 @@ public class Aggregator {
 		return albums;
 	}
 	
-	@Cacheable(CachingConfig.SONG_CACHE)
+	@Cacheable(value = CachingConfig.SONG_CACHE, unless ="#result.size() == 0")
 	public List<Song> getSongsInAlbum(String albumId) throws InterruptedException, ExecutionException {
+		logger.info("Cache Miss! Requesting Songs from services");
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
 		List<CompletableFuture<List<Song>>> completableFutures = new ArrayList<CompletableFuture<List<Song>>>();
