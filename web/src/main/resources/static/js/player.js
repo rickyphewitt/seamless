@@ -147,6 +147,7 @@ function doTimeUpdate(track) {
     $(appNowPlayingSlider).children("span").css("left", percentOf + "%");
 }
 
+
 /* DOM Ready Loading done here */
 $(function() {
 	  $(appNextId).click(function() {

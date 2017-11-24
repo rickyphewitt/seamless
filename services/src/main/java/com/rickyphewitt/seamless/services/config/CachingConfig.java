@@ -25,6 +25,8 @@ public class CachingConfig implements CachingConfigurer {
 	public final static String ALBUM_CACHE = "albums";
 	public final static String SONG_CACHE = "songs";
 	public final static String RAW_SONG_CACHE = "raw_songs";
+	public final static String IMAGE_URL_CACHE = "image_urls";
+	public final static String IMAGE_CACHE = "images";
     
 	@Bean
     @Override
@@ -53,9 +55,23 @@ public class CachingConfig implements CachingConfigurer {
     			.maximumSize(100)
     			.expireAfterAccess(2, TimeUnit.HOURS)
     			.build());
-    	
+		GuavaCache imageUrlCache = new GuavaCache(IMAGE_URL_CACHE,
+				CacheBuilder
+						.newBuilder()
+						.maximumSize(10000)
+						.expireAfterAccess(1, TimeUnit.DAYS)
+						.build());
+		GuavaCache imageCache = new GuavaCache(IMAGE_CACHE,
+				CacheBuilder
+						.newBuilder()
+						.maximumSize(10000)
+						.expireAfterAccess(1, TimeUnit.DAYS)
+						.build());
+
+
     	SimpleCacheManager cacheManager = new SimpleCacheManager();
-    	cacheManager.setCaches(Arrays.asList(artistCache, AlbumCache, SongCache, rawSongCache));
+    	cacheManager.setCaches(Arrays.asList(artistCache, AlbumCache,
+				SongCache, rawSongCache, imageUrlCache, imageCache));
     	
     	return cacheManager;
     }

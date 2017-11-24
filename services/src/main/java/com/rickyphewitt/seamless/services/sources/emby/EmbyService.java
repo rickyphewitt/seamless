@@ -3,6 +3,8 @@ package com.rickyphewitt.seamless.services.sources.emby;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -24,10 +26,13 @@ import com.rickyphewitt.seamless.services.sources.emby.deserializers.EmbyDeseria
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "prototype")
 public class EmbyService implements SourceService, AsyncSourceService {
-	
+
+	private static Logger logger = LogManager.getLogger();
+
 	// Attributes
 	private WebApiSource sourceSettings;
 	private final static String defaultPassword = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
+
 	// Injections
 	@Autowired
 	ApiV1Client apiClient;
@@ -87,7 +92,19 @@ public class EmbyService implements SourceService, AsyncSourceService {
 	public byte[] playSong(String songSourceId) {
 		return apiClient.getSong(songSourceId);
 	}
-	
+
+	@Override
+	@Retryable(maxAttempts = defaultMaxAttempts)
+	public String getPrimaryImage(String itemSourceId, String primaryImageId) {
+		return apiClient.getPrimaryImageUrl(itemSourceId, primaryImageId);
+	}
+
+	@Override
+	@Retryable(maxAttempts = defaultMaxAttempts)
+	public byte[] getImage(String url) {
+		return apiClient.getImage(url);
+	}
+
 	// private methods
 	public UserSet getPublicUsers() {
 		return apiClient.getPublicUsers();
@@ -137,9 +154,18 @@ public class EmbyService implements SourceService, AsyncSourceService {
 	public CompletableFuture<byte[]> playAsyncSong(String songSourceId) {
 		return CompletableFuture.completedFuture(this.playSong(songSourceId));
 	}
-	
-	
-	
+
+	@Override
+	public CompletableFuture<String> getAsyncPrimaryImage(String itemSourceId, String primaryImageId) {
+		return CompletableFuture.completedFuture(this.getPrimaryImage(itemSourceId, primaryImageId));
+	}
+
+	@Override
+	public CompletableFuture<byte[]> getAsyncImage(String url) {
+		return CompletableFuture.completedFuture(this.getImage(url));
+	}
+
+
 	// Getters/Setters
 	public WebApiSource getSourceSettings() {
 		return sourceSettings;

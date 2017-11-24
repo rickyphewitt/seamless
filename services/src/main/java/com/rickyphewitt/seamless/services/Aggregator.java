@@ -109,7 +109,7 @@ public class Aggregator {
 		return songs;
 	}
 	
-	@Cacheable(CachingConfig.RAW_SONG_CACHE)
+	@Cacheable(value = CachingConfig.RAW_SONG_CACHE, unless ="#result == null")
 	public byte[] playSong(String songId) throws InterruptedException, ExecutionException {
 		
 		List<CompletableFuture<byte[]>> completableFutures = new ArrayList<CompletableFuture<byte[]>>();
@@ -120,6 +120,32 @@ public class Aggregator {
 		CompletableFuture.anyOf(completableFutures.toArray(new CompletableFuture[0])).join();
 		return completableFutures.get(0).get();
 	}
-	
-	
+
+	@Cacheable(value = CachingConfig.IMAGE_URL_CACHE, unless ="#result.length() == 0")
+	public String getPrimaryImageUrl(String entityId, String primaryImageId) throws ExecutionException, InterruptedException {
+		List<CompletableFuture<String>> completableFutures = new ArrayList<CompletableFuture<String>>();
+		for(AsyncSourceService source: this.sources) {
+			completableFutures.add(source.getAsyncPrimaryImage(entityId, primaryImageId));
+		}
+
+		CompletableFuture.anyOf(completableFutures.toArray(new CompletableFuture[0])).join();
+		return completableFutures.get(0).get();
+
+
+
+
+	}
+
+	@Cacheable(value = CachingConfig.IMAGE_CACHE, unless ="#result == null")
+	public byte[] getImage(String url) throws ExecutionException, InterruptedException {
+		List<CompletableFuture<byte[]>> completableFutures = new ArrayList<CompletableFuture<byte[]>>();
+		for (AsyncSourceService source : this.sources) {
+			completableFutures.add(source.getAsyncImage(url));
+		}
+
+		CompletableFuture.anyOf(completableFutures.toArray(new CompletableFuture[0])).join();
+		return completableFutures.get(0).get();
+	}
+
+
 }

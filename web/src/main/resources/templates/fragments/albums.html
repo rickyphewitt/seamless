@@ -5,8 +5,8 @@
         <div id="albums" class="verticleOverflow">
              <th:block th:each="album : ${albums}">
                  <div class="albumContainer smallPadding floatLeft">
-                    <div class="appAlbum album albumBorderBg" data-th-attr="entityId=${album.mediaId}">
-                        <div th:id="${album.mediaId}" th:text="${album.name}" class="albumCover albumDefaultBg">Cities</div>
+                    <div class="appAlbum album albumBorderBg" data-th-attr="entityId=${album.mediaId}, primaryImage=${album.primaryImage}">
+                        <div th:id="${album.mediaId}" class="albumCover albumDefaultBg"><img class="albumCover" src="/images/no_album_200.png" /></div>
                     </div>
                     <div class="albumInfo">
                         <span th:text="${album.name}" class="albumTitle">Cities</span> -

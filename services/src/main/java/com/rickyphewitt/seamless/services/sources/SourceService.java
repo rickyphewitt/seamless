@@ -17,4 +17,6 @@ public interface SourceService {
 	List<Album> getAlbumsByArtist(String artistSourceId) throws Exception;
 	List<Song> getSongsInAlbum(String albumSourceId) throws Exception;
 	byte[] playSong(String songSourceId);
+	String getPrimaryImage(String itemSourceId, String primaryImageId);
+	byte[] getImage(String url);
 }

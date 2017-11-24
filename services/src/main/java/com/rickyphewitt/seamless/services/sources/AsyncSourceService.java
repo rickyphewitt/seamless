@@ -18,4 +18,8 @@ public interface AsyncSourceService {
 	CompletableFuture<List<Song>> getAsyncSongsInAlbum(String albumSourceId);
 	@Async
 	CompletableFuture<byte[]> playAsyncSong(String songSourceId);
+	@Async
+	CompletableFuture<String> getAsyncPrimaryImage(String entitySourceId, String primaryImageId);
+	@Async
+	CompletableFuture<byte[]> getAsyncImage(String url);
 }

@@ -41,11 +41,19 @@ function goToArtist(artist) {
         accentArtist(artist);
         setActive(appActiveArtistName, artist.text());
         setGroupActions(artistClass, artist.attr(entityId));
+
         //loadAlbumPlayJs();
 		 // open album
 		 $(album).click(function() {
 			 goToAlbum($(this));
 		  });
+
+		  //load image
+		  $(album).each(function(index, value){
+		    console.log($(value));
+		    getPrimaryImage($(value).attr(entityId), $(value).attr(primaryImage));
+
+		  })
 	});
 
 
@@ -100,6 +108,20 @@ function filterArtists(filterBy) {
             $(this).hide();
         }
     })
+}
+
+function getPrimaryImage(entityId, imageTagId) {
+    // returns default image if none exists
+    image_url = imagesUrl + "/" + entityId
+    $.ajax(image_url, {
+        success: function () {
+            $("#"+ entityId).find("img").attr("src", imagesUrl + "/" + entityId);
+       }
+    });
+
+
+
+
 }
 
 /* Footer Nav */

@@ -31,6 +31,7 @@ public class EmbyDeserializer {
 		commonArtist.setMediaIdSource(IdSource.EMBY);
 		commonArtist.setName(embyArtist.getName());
 		commonArtist.setDuration(embyArtist.getRunTimeTicks().toString());
+		commonArtist.setPrimaryImage(embyArtist.getPrimaryImage());
 		
 		return commonArtist;
 		
@@ -53,6 +54,7 @@ public class EmbyDeserializer {
 		commonArtist.setMediaIdSource(IdSource.EMBY);
 		commonArtist.setName(embyAlbum.getName());
 		commonArtist.setDuration(embyAlbum.getRunTimeTicks().toString());
+		commonArtist.setPrimaryImage(embyAlbum.getPrimaryImage());
 		
 		return commonArtist;
 		
@@ -75,6 +77,7 @@ public class EmbyDeserializer {
 		commonSong.setName(embySong.getName());
 		commonSong.setDuration(embySong.getRunTimeTicks().toString());
 		commonSong.setTrackNumber(embySong.getTrackNumber());
+		commonSong.setPrimaryImage(embySong.getPrimaryImage());
 		return commonSong;
 		
 	}

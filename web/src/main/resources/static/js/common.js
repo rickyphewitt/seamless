@@ -16,6 +16,7 @@ var classAttrKey = "." + attrKey;
 
 // entityId == id of entity (album/artist/song/ect)
 var entityId = "entityId";
+var primaryImage = "primaryImage";
 
 // headings
 var appMainContentHeading = idAttrKey + "MainContentHeading";
@@ -36,6 +37,8 @@ var playlistsUrl = "/playlists";
 var favoritesUrl = "/favorites";
 var settingsUrl = "/settings";
 var nowPlayingQueueUrl = "/queue";
+var imagesUrl = "media/images";
+var noAlbumImageUrl = IMAGE_LOCATION + "no_album_200.png"
 
 // nav
 var hamNav = idAttrKey + "HamNav";
