@@ -31,7 +31,7 @@ function accentArtist(artist) {
 }
 
 function navGoTo(location) {
-	$(innerContentDiv).load(location);
+	$(mainContent).load(location);
 }
 
 /* Artist Nav */
@@ -110,6 +110,48 @@ function filterArtists(filterBy) {
     })
 }
 
+/* Settings Nav */
+function goToSettings() {
+    $(mainContent).load(settingsUrl, function(){
+        setMainHeading(SETTINGS_TEXT);
+        saveSettings();
+
+    });
+    //navGoTo(settingsUrl);
+
+
+}
+
+function saveSettings() {
+    ajaxFormPost(appSettingsForm);
+}
+
+function ajaxFormPost(postHandle) {
+    var $form = $(postHandle);
+    $form.on('submit', function(e) {
+        resetFormMessages();
+        e.preventDefault();
+        $.ajax({
+            url: $form.attr('action'),
+            type: 'post',
+            data: $form.serialize(),
+            success: function(response) {
+                if(!response.success) {
+                    $(errorDiv).fadeIn('slow', function(){
+                        $(errorDiv).text(response.error);
+                    });
+                } else {
+                    $(successDiv).fadeIn('slow', function(){
+                        $(successDiv).text(SUCCESS);
+                    });
+
+                }
+            }
+        })
+    });
+}
+
+
 function getPrimaryImage(entityId, imageTagId) {
     // returns default image if none exists
     image_url = imagesUrl + "/" + entityId
@@ -119,8 +161,13 @@ function getPrimaryImage(entityId, imageTagId) {
        }
     });
 
+}
 
-
+function resetFormMessages() {
+    $(errorDiv).hide();
+    $(errorDiv).text("");
+    $(successDiv).hide();
+    $(successDiv).text("");
 
 }
 
@@ -151,5 +198,10 @@ $(function() {
 	$(search).on("input", function(){
         filterArtists($(this).val());
 	});
+
+    // opens settings
+    $(settingsNav).click(function() {
+        goToSettings();
+    });
 
 });

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="settings" id="innerContent" class="row">
+		<h3>Theses changes apply to all sources</h3>
+		<form action="#" id="appSettingsForm" class="form secondaryBg floatLeft" th:action="@{/settings}" th:object="${config}" method="post">
+			<label for="source" class="smallPadding">Source:</label>
+			<input type="text" id="source" name="source" th:value="*{source}" th:errorclass="fieldError" />
+			<label for="prefetchSongCount" class="smallPadding">Songs To Prefetch:</label>
+			<input type="text" id="prefetchSongCount" name="prefetchSongCount" th:value="*{prefetchSongCount}" th:errorclass="fieldError" />
+			<label for="configDirectory" class="smallPadding">Config Directory:</label>
+			<input type="text" id="configDirectory" name="configDirectory" th:value="*{configDirectory}" th:errorclass="fieldError" />
+			<button type="submit" id="appSettingsSave" name="saveGlobal">Save</button>
+		</form>
+		<div id="appError" class="clearRight error"></div>
+		<div id="appSuccess" class="clearRight success"></div>
+		<div id="appSources" class="clearBoth">
+			<hr/>
+			<h2>Source Configs</h2>
+		</div>
+	</div>
+</body>
+</html>

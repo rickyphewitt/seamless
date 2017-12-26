@@ -1,0 +1,7 @@
+{
+  "source": "file",
+  "prefetchSongCount": 5,
+  "cacheSize": 100,
+  "cacheTimeout": 100,
+  "sources": []
+}

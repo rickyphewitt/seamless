@@ -1,21 +1,58 @@
 package com.rickyphewitt.seamless.web;
 
+import com.rickyphewitt.seamless.data.Config;
+import com.rickyphewitt.seamless.data.SimpleResponse;
+import com.rickyphewitt.seamless.data.exceptions.ConfigException;
+import com.rickyphewitt.seamless.services.FragmentService;
+import com.rickyphewitt.seamless.services.SettingsService;
+import com.rickyphewitt.seamless.services.SimpleErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rickyphewitt.seamless.services.FragmentService;
+import javax.validation.Valid;
 
 @Controller
 public class SettingsController {
 
 	@Autowired 
 	FragmentService fragmentService;
+
+	@Autowired
+	SettingsService settingsService;
+
+	@Autowired
+	SimpleErrorService simpleErrorService;
 	
-	@RequestMapping("/settings")
-	public String genres(Model model) {
-		
+	@GetMapping("/settings")
+	public String settings(Model model) {
 		return fragmentService.getFragment("settings");
+	}
+
+	@PostMapping(value = "/settings", produces = {"application/JSON"})
+	public @ResponseBody
+	SimpleResponse save(@ModelAttribute @Valid Config config, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return simpleErrorService.error(bindingResult.getAllErrors().get(0).getDefaultMessage());
+		} else {
+			try {
+				settingsService.writeConfig(config);
+			} catch (ConfigException e) {
+				return simpleErrorService.error(e.getMessage());
+			}
+		}
+		return simpleErrorService.success();
+
+	}
+
+	// model mappings
+	@ModelAttribute("config")
+	public Config returnConfig() {
+		return this.settingsService.getConfig();
 	}
 }

@@ -152,6 +152,14 @@ li:hover {
 
 /* utility styles */
 
+.error {
+    color: red;
+}
+
+.success {
+    color: green
+}
+
 .clearBoth {
     clear: both;
 }
@@ -237,6 +245,13 @@ li:hover {
     margin: 0 auto;
 }
 
+.albumCoverSmall {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+
 .albumNowPlaying {
     width: 110px;
     height: 105px;
@@ -320,7 +335,7 @@ li:hover {
 
 .nowPlayingInfo {
     width: 25%;
-    padding-left: 30px;
+    padding-left: 100px;
 }
 
 .nowPlayingAlbum {
@@ -347,3 +362,88 @@ li:hover {
 	touch-action: none;
     background-color: #86becb;
 }
+
+/* settings for */
+.form{
+    font: 95% Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 16px;
+}
+.form h1{
+    background: #43D1AF;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+}
+
+/* thanks for the form example
+* https://www.sanwebe.com/2014/08/css-html-forms-designs
+*/
+
+.form input[type="text"],
+.form input[type="date"],
+.form input[type="datetime"],
+.form input[type="email"],
+.form input[type="number"],
+.form input[type="search"],
+.form input[type="time"],
+.form input[type="url"],
+.form textarea,
+.form select 
+{
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    color: #555;
+    font: 95% Arial, Helvetica, sans-serif;
+}
+.form input[type="text"]:focus,
+.form input[type="date"]:focus,
+.form input[type="datetime"]:focus,
+.form input[type="email"]:focus,
+.form input[type="number"]:focus,
+.form input[type="search"]:focus,
+.form input[type="time"]:focus,
+.form input[type="url"]:focus,
+.form textarea:focus,
+.form select:focus
+{
+    box-shadow: 0 0 5px #43D1AF;
+    padding: 3%;
+    border: 1px solid #43D1AF;
+}
+
+.form input[type="submit"],
+.form input[type="button"]{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 3%;
+    background: #43D1AF;
+    border-bottom: 2px solid #30C29E;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;    
+    color: #fff;
+}
+.form input[type="submit"]:hover,
+.form input[type="button"]:hover{
+    background: #2EBC99;
+}
+
+/*End form example */

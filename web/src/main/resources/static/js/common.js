@@ -5,9 +5,11 @@
 
 // Text contants
 var NOW_PLAYING_TEXT = "Now Playing";
+var SETTINGS_TEXT = "Settings";
 var IMAGE_LOCATION = "images/";
 var PLAY_IMG = IMAGE_LOCATION + "playLight.png";
 var PAUSE_IMG = IMAGE_LOCATION + "pauseLight.png";
+var SUCCESS = "Success";
 
 // key prepended to all functional vs stylistic classes
 var attrKey = "app";
@@ -27,6 +29,9 @@ var mainContent = idAttrKey + "ContentContent";
 var appSidebarContentArtists = classAttrKey + "ContentList";
 var appSidebarContentMenu = classAttrKey + "MenuList";
 
+var errorDiv = idAttrKey + "Error";
+var successDiv = idAttrKey + "Success";
+
 /* Urls */
 var homeUrl = "/home";
 var artistsUrl = "/artists";
@@ -44,10 +49,10 @@ var noAlbumImageUrl = IMAGE_LOCATION + "no_album_200.png"
 var hamNav = idAttrKey + "HamNav";
 var navContentList = classAttrKey + "ContentList";
 var navMenuList = classAttrKey + "MenuList";
+var settingsNav = idAttrKey + "Settings";
 var artistNavMenuItem = classAttrKey + "ArtistNav";
 var album = classAttrKey + "Album";
-var search = idAttrKey + "Search"
-
+var search = idAttrKey + "Search";
 
 
 //attributes
@@ -99,6 +104,7 @@ var appPlayId = idAttrKey + "Play";
 var appPlayingSongName = idAttrKey + "NowPlayingSong";
 var appPlayingSongArtistName = idAttrKey + "NowPlayingArtist";
 var appPlayingSongAlbumName = idAttrKey + "NowPlayingAlbum";
+var appPlayingSongAlbumArt = idAttrKey + "NowPlayingAlbumArt";
 var appActiveArtistName = "artist";
 var appActiveAlbumName = "album";
 var appActiveSongName = "song";
@@ -108,7 +114,7 @@ var appNowPlayingSlider = idAttrKey + "NowPlayingTime";
 var appGroupPlay = idAttrKey + "GroupPlay";
 var appGroupShuffle = idAttrKey + "GroupShuffle";
 var appGroupMix = idAttrKey + "GroupMix";
-
+var appSettingsForm = idAttrKey + "SettingsForm";
 // css classes
 var nowPlayingQueueItemClass = "nowPlayingQueueItem";
 var nowPlayingQueueSongClass = classAttrKey + "PlaySong";

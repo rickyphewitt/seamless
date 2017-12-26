@@ -3,6 +3,8 @@ package com.rickyphewitt.seamless.services.prefetch;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.rickyphewitt.seamless.services.SongService;
 
 @Service
 public class SongPrefetchService {
+	private static Logger logger = LogManager.getLogger();
 
 	@Autowired
 	ConfigService configService;
@@ -24,7 +27,7 @@ public class SongPrefetchService {
 	SongService songService;
 	
 	public void prefetchSongs() {
-		System.out.println("Eagerly Prefetching next " +
+		logger.info("Eagerly prefetching next " +
 				configService.getConfig().getPrefetchSongCount() + " songs");
 		
 		Map<Integer, Song> playQueue = playQueueService.getPlayQueue();
@@ -36,13 +39,13 @@ public class SongPrefetchService {
 			if(!playQueueService.isOutOfBounds(i)) {
 				try {
 					songService.playSong(playQueue.get(i).getMediaId());
-					System.out.println("Cached: " + playQueue.get(i).getMediaId() );
+					logger.info("Cached: " + playQueue.get(i).getMediaId() );
 				} catch (InterruptedException | ExecutionException e) {
-					System.out.println("FAILED TO CACHE song with media id" + playQueue.get(i).getMediaId());
+					logger.error("FAILED TO CACHE song with media id" + playQueue.get(i).getMediaId());
 					e.printStackTrace();
 				}
 			} else {
-				System.out.println("Reached end of Qeueue, no songs to Cache");
+				logger.info("Reached end of Qeueue, no songs to Cache");
 			}
 			
 			
