@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="addSource" id="innerContent" class="row">
+    <h3>Add a Source</h3>
+    <form action="#" id="appSettingsForm" class="form secondaryBg floatLeft" th:action="@{/api/v1/sources}" th:object="${source}" method="post">
+        <label for="source" class="smallPadding">Source:</label>
+        <input type="text" id="source" name="source" th:value="*{source}" th:errorclass="fieldError" />
+        <label for="name" class="smallPadding">Name:</label>
+        <input type="text" id="name" name="name" th:value="*{name}" th:errorclass="fieldError" />
+        <label for="username" class="smallPadding">Username:</label>
+        <input type="text" id="username" name="username" th:value="*{username}" th:errorclass="fieldError" />
+        <label for="password" class="smallPadding">Password:</label>
+        <input type="text" id="password" name="password" th:value="*{password}" th:errorclass="fieldError" />
+        <label for="url" class="smallPadding">Url:</label>
+        <input type="text" id="url" name="url" th:value="*{url}" th:errorclass="fieldError" />
+        <button type="submit" id="appSettingsSave" name="saveGlobal">Save</button>
+    </form>
+    <div id="appError" class="clearRight error"></div>
+    <div id="appSuccess" class="clearRight success"></div>
+    <div id="appSources" class="clearBoth">
+    </div>
+</div>
+</body>
+</html>

@@ -33,6 +33,7 @@ var errorDiv = idAttrKey + "Error";
 var successDiv = idAttrKey + "Success";
 
 /* Urls */
+var apiV1 = "/api/v1";
 var homeUrl = "/home";
 var artistsUrl = "/artists";
 var albumsUrl = "/albums";
@@ -44,6 +45,7 @@ var settingsUrl = "/settings";
 var nowPlayingQueueUrl = "/queue";
 var imagesUrl = "media/images";
 var noAlbumImageUrl = IMAGE_LOCATION + "no_album_200.png"
+var sourcesUrl = "/sources";
 
 // nav
 var hamNav = idAttrKey + "HamNav";
@@ -53,6 +55,7 @@ var settingsNav = idAttrKey + "Settings";
 var artistNavMenuItem = classAttrKey + "ArtistNav";
 var album = classAttrKey + "Album";
 var search = idAttrKey + "Search";
+var addSourceId = idAttrKey + "AddSource";
 
 
 //attributes

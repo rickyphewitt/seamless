@@ -6,9 +6,7 @@ import com.rickyphewitt.seamless.data.Config;
 import com.rickyphewitt.seamless.data.exceptions.ConfigException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -22,13 +20,8 @@ public class ConfigService {
 	@Value("${custom.config.directory}")
 	String customConfigDir;
 
-
-	@Autowired
-	private ResourceLoader resourceLoader;
-
 	private Config config;
 	private static Logger logger = LogManager.getLogger();
-	//private String customConfigFilePath;
 
 	public Config getConfig() {
 		return config;
@@ -42,6 +35,7 @@ public class ConfigService {
 	 * Loads config from file
 	 *
 	 */
+	//@ToDo make post construct
 	public void loadConfigFromFile() {
 		try {
 			//this.customConfigFilePath = this.customConfigFile();

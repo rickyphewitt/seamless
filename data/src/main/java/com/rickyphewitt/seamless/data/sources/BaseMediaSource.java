@@ -2,18 +2,24 @@ package com.rickyphewitt.seamless.data.sources;
 
 import com.rickyphewitt.seamless.data.enums.IdSource;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public abstract class BaseMediaSource {
 
 	// Attributes
-	String name;
-	IdSource source;
-	
+	private String name;
+	private IdSource source;
+	private String configFileName;
+	private int version;
+
 	// Constructor
 	public BaseMediaSource(){}
 	
 	public BaseMediaSource(String name, IdSource source) {
 		this.name = name;
 		this.source = source;
+		this.configFileName = source.name() + "." + this.generateTimestamp();
 	}
 	
 	
@@ -33,5 +39,27 @@ public abstract class BaseMediaSource {
 	public void setSource(IdSource source) {
 		this.source = source;
 	}
-	
+
+	public String getConfigFileName() {
+		return configFileName;
+	}
+
+	public void setConfigFileName(String configFileName) {
+		this.configFileName = configFileName;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	private String generateTimestamp() {
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return sdf.format(timestamp);
+	}
+
 }

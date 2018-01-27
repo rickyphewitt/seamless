@@ -1,43 +1,62 @@
 package com.rickyphewitt.seamless.services;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.rickyphewitt.seamless.data.enums.IdSource;
+import com.rickyphewitt.seamless.data.sources.WebApiSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.rickyphewitt.seamless.data.Config;
-import com.rickyphewitt.seamless.data.enums.IdSource;
-import com.rickyphewitt.seamless.data.sources.WebApiSource;
+import java.util.stream.Stream;
 
 @Service
 public class SourceConfigService {
 
+
+	@Value("${source.config.directory}")
+	String sourceConfigDirectory;
+
 	// Attributes
-	private HashMap<IdSource, List<WebApiSource>> webSources;	
-	
-	public SourceConfigService() {
-		this.readConfig();
-	}
-	
+	private HashMap<IdSource, List<WebApiSource>> webSources;
+	private static Logger logger = LogManager.getLogger();
+
 	// Private methods
-	private void readConfig() {
-		//@ToDo: read user config file
-		WebApiSource embySource = new WebApiSource("Emby1", IdSource.EMBY);
-		embySource.setUsername("username1");
-		embySource.setPassword("da39a3ee5e6b4b0d3255bfef95601890afd80709");
-		embySource.setUrl("http://emby:8096");
-		this.addWebSources(IdSource.EMBY, embySource);
-		
-		WebApiSource embySource2 = new WebApiSource("Emby2", IdSource.EMBY);
-		embySource2.setUsername("username2");
-		embySource2.setPassword("da39a3ee5e6b4b0d3255bfef95601890afd80709");
-		embySource2.setUrl("http://emby:8096");
-		this.addWebSources(IdSource.EMBY, embySource2);
-		
-		
+
+	/**
+	 * Loads all configs from source folder
+	 *
+	 */
+	public void loadSources() {
+		List<File> sources = new ArrayList<>();
+		List<Path> fileNames = new ArrayList<>();
+
+		this.makeConfigDirIfRequired();
+		try (Stream<Path> paths = Files.walk(Paths.get(System.getProperty("user.home") + "/" + this.sourceConfigDirectory))) {
+			paths
+					.filter(Files::isRegularFile)
+					.forEach(s -> fileNames.add(s.getFileName()));
+		} catch(IOException e) {
+			logger.error("Unable to load sources!" + e.getMessage());
+		}
+
+		logger.info("Found: " + fileNames.size() + " existing configuration files.");
+
+		for (Path p: fileNames) {
+			sources.add(new File(System.getProperty("user.home") + "/" + this.sourceConfigDirectory + "/" +p.toString()));
+		}
+
+		sortSources(sources);
 	}
-	
+
 	
 	// Getters/Setters
 	public HashMap<IdSource, List<WebApiSource>> getWebSources() {
@@ -63,6 +82,77 @@ public class SourceConfigService {
 			this.webSources.put(source, newSource);
 		}
 	}
-	
-	
+
+
+	// private methods
+
+	/**
+	 * Helper method to make config directory if doesn't exist
+	 * This would run in the 1st run case
+	 */
+	private void makeConfigDirIfRequired() {
+		File directory = new File(System.getProperty("user.home") + "/" + this.sourceConfigDirectory);
+		if (!directory.exists()) {
+			directory.mkdir();
+		}
+	}
+
+	/**
+	 * Sorts sources into their IdSource
+	 *
+	 * @param sources
+	 */
+	private void sortSources(List<File> sources) {
+		for(File file: sources) {
+			if(file.getName().contains(IdSource.EMBY.toString())) {
+				try {
+					addToMap(IdSource.EMBY, file);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Adds sources to map
+	 *
+	 * @param idSource
+	 * @param source
+	 * @throws FileNotFoundException
+	 */
+	private void addToMap(IdSource idSource, File source) throws FileNotFoundException {
+
+		if(this.webSources == null) {
+			this.webSources = new HashMap<IdSource, List<WebApiSource>>();
+		}
+		if(this.webSources.containsKey(idSource)) {
+			List<WebApiSource> existingSources = this.webSources.get(idSource);
+			existingSources.add(readWebApiSourceFile(source));
+			this.webSources.put(idSource, existingSources);
+		} else {
+			List<WebApiSource> sources = new ArrayList<>();
+			sources.add(readWebApiSourceFile(source));
+			this.webSources.put(idSource, sources);
+		}
+
+	}
+
+	/**
+	 * Reads web api souce from file into instance
+	 *
+	 * @TODO: create a global gson config
+	 *
+	 * @param source
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	private WebApiSource readWebApiSourceFile(File source) throws FileNotFoundException {
+		Reader targetReader = new FileReader(source);
+		Gson gson = new GsonBuilder().create();
+		WebApiSource webApiSource = gson.fromJson(targetReader, WebApiSource.class);
+		return webApiSource;
+	}
+
+
 }

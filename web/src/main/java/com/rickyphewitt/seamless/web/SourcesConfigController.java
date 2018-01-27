@@ -23,13 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class SettingsController {
+public class SourcesConfigController {
 
 	@Autowired 
 	FragmentService fragmentService;
-
-	@Autowired
-	SettingsService settingsService;
 
 	@Autowired
 	SourceConfigService sourceConfigService;
@@ -37,39 +34,30 @@ public class SettingsController {
 	@Autowired
 	SimpleErrorService simpleErrorService;
 	
-	@GetMapping("/settings")
-	public String settings(Model model) {
-		return fragmentService.getFragment("settings");
+	@GetMapping("api/v1/sources")
+	public String sources(Model model) {
+		return fragmentService.getFragment("addSource");
 	}
 
-	@PostMapping(value = "/settings", produces = {"application/JSON"})
+	@PostMapping(value = "/api/v1/sources", produces = {"application/JSON"})
 	public @ResponseBody
-	SimpleResponse save(@ModelAttribute @Valid Config config, BindingResult bindingResult) {
+	SimpleResponse save(@ModelAttribute @Valid WebApiSource webApiSource, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return simpleErrorService.error(bindingResult.getAllErrors().get(0).getDefaultMessage());
 		} else {
-			try {
+			/*try {
 				settingsService.writeConfig(config);
 			} catch (ConfigException e) {
 				return simpleErrorService.error(e.getMessage());
-			}
+			}*/
 		}
 		return simpleErrorService.success();
 
 	}
 
 	// model mappings
-	@ModelAttribute("config")
-	public Config returnConfig() {
-		return this.settingsService.getConfig();
-	}
-
-	@ModelAttribute("sources")
-	public List<WebApiSource> getSournces() {
-		List<WebApiSource> sources = new ArrayList();
-		for(IdSource source: this.sourceConfigService.getWebSources().keySet()) {
-			sources.addAll(this.sourceConfigService.getWebSources().get(source));
-		}
-		return sources;
+	@ModelAttribute("source")
+	public WebApiSource getEmptySource() {
+		return new WebApiSource("Emby", IdSource.EMBY);
 	}
 }

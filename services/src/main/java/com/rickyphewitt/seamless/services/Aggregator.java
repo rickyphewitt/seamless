@@ -44,6 +44,7 @@ public class Aggregator {
 	 * @throws ConnectionException
 	 */
 	public void login() throws ConnectionException {
+		sourceConfigService.loadSources();
 		logger.info("Attempting to log into sources");
 		sources = new ArrayList<AsyncSourceService>();
 		for(IdSource source: sourceConfigService.getWebSources().keySet()) {

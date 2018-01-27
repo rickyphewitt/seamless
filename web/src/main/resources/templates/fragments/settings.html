@@ -17,6 +17,35 @@
 		<div id="appSources" class="clearBoth">
 			<hr/>
 			<h2>Source Configs</h2>
+			<div id="appContentContent" class="contentContent clearLeft">
+				<div id="queue" class="verticleOverflow queue">
+					<table class="queueTable largePadding">
+						<thead>
+							<tr>
+								<th>Source Type</th>
+								<th>Source Name</th>
+								<th>Username</th>
+								<th>Url</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr th:each="source : ${sources}" class="appQueueTr">
+							<td class="mediumPadding queueTd" th:text="${source.source}">Emby</td>
+							<td class="mediumPadding queueTd" th:text="${source.name}">Source 1</td>
+							<td class="mediumPadding queueTd" th:text="${source.username}">username</td>
+							<td class="mediumPadding queueTd" th:text="${source.url}">http://localhost</td>
+							<td class="mediumPadding queueTd">Edit</td>
+							<td class="mediumPadding queueTd">Delete</td>
+						</tr>
+						<tr>
+							<td colspan="6" id="appAddSource">Add Source</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

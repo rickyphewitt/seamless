@@ -27,6 +27,10 @@ public class SongPrefetchService {
 	SongService songService;
 	
 	public void prefetchSongs() {
+		if(configService.getConfig() == null) {
+			//@ToDo: make a post construct on config service
+			configService.loadConfigFromFile();
+		}
 		logger.info("Eagerly prefetching next " +
 				configService.getConfig().getPrefetchSongCount() + " songs");
 		

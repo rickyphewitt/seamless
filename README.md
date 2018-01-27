@@ -15,11 +15,9 @@ Seamless aims to blend all sources of music into a single interface
 # Dev
 * Download and build Emby Api Java jar from https://github.com/rickyphewitt/embyClientJava
   * Run ``` mvn clean install ``` inside that repo
-* Input the required user/pass for emby in the file: services/src/main/java/com/rickyphewitt/seamless/services/SourceConfigService.java
-* Build project
-``` mvn clean install ```
-* Run project
-```java -jar web/target/web-0.0.1-SNAPSHOT.jar ```
+* Update the EMBY.2018.01.21.07.38.56 config in build/sources with user/pass/server info
+* Build/run project
+``` make run_with_config ```
 * Open http://localhost:8080 
 
 # Contributor Info

@@ -115,6 +115,9 @@ function goToSettings() {
     $(mainContent).load(settingsUrl, function(){
         setMainHeading(SETTINGS_TEXT);
         saveSettings();
+        $(addSourceId).click(function() {
+            addSource();
+         });
 
     });
     //navGoTo(settingsUrl);
@@ -169,6 +172,14 @@ function resetFormMessages() {
     $(successDiv).hide();
     $(successDiv).text("");
 
+}
+
+
+// add source nav
+function addSource() {
+    $(mainContent).load(apiV1 + sourcesUrl, function(){
+        setMainHeading(SETTINGS_TEXT);
+    });
 }
 
 /* Footer Nav */
