@@ -5,6 +5,8 @@ test-results/
 !gradle/wrapper/gradle-wrapper.jar
 logs/*
 */logs/
+embyApiClient
+
 ### STS ###
 .apt_generated
 .classpath
