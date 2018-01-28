@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rickyphewitt/seamless.svg?branch=master)](https://travis-ci.org/rickyphewitt/seamless)
+
 # Seamless
 Web app built upon Spring boot
 Seamless aims to blend all sources of music into a single interface

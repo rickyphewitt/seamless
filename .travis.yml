@@ -1,0 +1,5 @@
+language: java
+sudo: false
+before_install:
+  - make build_dependencies
+script: make build

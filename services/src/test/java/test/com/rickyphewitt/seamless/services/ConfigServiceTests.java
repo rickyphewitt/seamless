@@ -50,7 +50,7 @@ public class ConfigServiceTests {
 		this.createDirIfDoesNotExist();
 
 		try {
-			writer = new PrintWriter("/home/ricky/.seamless/.config.json", "UTF-8");
+			writer = new PrintWriter(directory + "/.config.json", "UTF-8");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			Assert.assertTrue(false);
@@ -123,7 +123,7 @@ public class ConfigServiceTests {
 		this.createDirIfDoesNotExist();
 
 		try {
-			writer = new PrintWriter("/home/ricky/.seamless/.config.json", "UTF-8");
+			writer = new PrintWriter(directory + "/.config.json", "UTF-8");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			Assert.assertTrue(false);
