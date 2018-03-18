@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="firstRunSources" id="appContentContent" class="contentContent clearLeft">
+	<div id="firstRunSources" class="verticleOverflow">
+		<th:block th:each="source : ${supportedSources}">
+			<div class="albumContainer smallPadding floatLeft">
+				<div class="appAlbum album albumBorderBg" data-th-attr="entityId=${source.configName}">
+					<div th:id="${source.configName}" class="albumCover albumDefaultBg">
+						<img class="albumCover" th:src="${source.image}" src="/images/no_album_200.png" /></div>
+				</div>
+				<div class="albumInfo">
+					<span th:text="${source.name}" class="albumTitle">Cities</span>
+				</div>
+			</div>
+		</th:block>
+		<div class="albumContainer smallPadding floatLeft">
+			<div class="appAlbum album albumBorderBg">
+				<div class="albumCover">
+					<div class="albumCover">
+						<ol class="mediumPadding">
+							<li class="smallPadding">Choose a Source</li>
+							<li class="smallPadding">Add details</li>
+							<li class="smallPadding">Enjoy your music!</li>
+						</ol>
+					</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

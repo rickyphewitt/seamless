@@ -1,5 +1,6 @@
 package com.rickyphewitt.seamless.services;
 
+import com.rickyphewitt.seamless.data.exceptions.ConfigNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,14 @@ public class LoginService {
 	
 	@Autowired
 	ApiService apiService;
-		
+
 	@Autowired
 	ServerService serverService;
 	
 	@Autowired
 	Aggregator aggregatorService;
 	
-	public void login() throws ConnectionException {
+	public void login() throws ConnectionException, ConfigNotFoundException {
 		aggregatorService.login();
 	}
 	
@@ -45,14 +46,14 @@ public class LoginService {
 		if(isSinglePublicUser(users)) {
 			loginUserPasswordNotSet(users.getItems().get(0));
 			returnUrl = UrlConstants.homeUrl;
-		}		
+		}
 		return returnUrl;
 	}
 	
 	public Server getServer() {
 		serverService = new ServerService(apiService.getEmbyUrl(),
 				apiService.getUsername(), apiService.getPassword());
-		
+
 		return serverService.getServer();
 	}
 	
@@ -63,7 +64,7 @@ public class LoginService {
 		serverService.setPublicServerInfo(pubInfo);
 		return pubInfo;
 	}
-	
+
 	public UserSet getPublicUsers() {
 		return apiService.getPublicUsers();
 	}

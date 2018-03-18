@@ -19,4 +19,6 @@ public class FragmentConstants {
 	public static final String FRAGMENT_SETTINGS = "settings";
 	public static final String FRAGMENT_PLAY_QUEUE = "playQueue";
 	public static final String FRAGMENT_ADD_SOURCE = "addSource";
+	public static final String FRAGMENT_FIRST_RUN_SOURCES = "firstRunSources";
+
 }

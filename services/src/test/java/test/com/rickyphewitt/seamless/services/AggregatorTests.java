@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import com.rickyphewitt.seamless.data.exceptions.ConfigNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +50,7 @@ public class AggregatorTests {
 	EmbyService embyService;
 
 	@Test
-	public void happyPath_loginMultipleEmbyServer() throws ConnectionException {
+	public void happyPath_loginMultipleEmbyServer() throws ConnectionException, ConfigNotFoundException {
 		// Data setup
 		int recordsToCreate = 2;
 		
@@ -73,7 +74,7 @@ public class AggregatorTests {
 	}
 	
 	@Test
-	public void happyPath_getArtistsMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException {
+	public void happyPath_getArtistsMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException, ConfigNotFoundException {
 		// Data setup
 		int recordsToCreate = 2;
 		
@@ -103,7 +104,7 @@ public class AggregatorTests {
 	}
 	
 	@Test
-	public void happyPath_getAlbumsMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException {
+	public void happyPath_getAlbumsMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException, ConfigNotFoundException {
 		// Data setup
 		int recordsToCreate = 2;
 		String artistId = StringUtils.randomAlphanumeric(10);
@@ -133,7 +134,7 @@ public class AggregatorTests {
 	}
 	
 	@Test
-	public void happyPath_getSongsInAlbumMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException {
+	public void happyPath_getSongsInAlbumMultipleEmbyServer() throws ConnectionException, InterruptedException, ExecutionException, ConfigNotFoundException {
 		// Data setup
 		int recordsToCreate = 2;
 		String artistId = StringUtils.randomAlphanumeric(10);

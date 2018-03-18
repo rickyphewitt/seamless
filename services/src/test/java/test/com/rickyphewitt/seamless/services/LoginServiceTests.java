@@ -1,11 +1,16 @@
 package test.com.rickyphewitt.seamless.services;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.rickyphewitt.seamless.data.Config;
+import com.rickyphewitt.seamless.data.exceptions.ConfigNotFoundException;
+import com.rickyphewitt.seamless.data.exceptions.ConnectionException;
+import com.rickyphewitt.seamless.services.Aggregator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,14 +40,17 @@ public class LoginServiceTests {
 	static final String validHost = "http://emby:8096";
 	static Random rand = new Random();
 	
-	@Spy
-	ServerService serverService;
-	
-	@Mock
-	ApiService apiService;
-	
 	@InjectMocks
 	LoginService loginService;
+
+	@Spy
+	ServerService serverService;
+
+	@Mock
+	ApiService apiService;
+
+	@Mock
+	Aggregator aggregatorService;
 	
 	@Before
 	public void setup() {
@@ -64,23 +72,23 @@ public class LoginServiceTests {
 	
 	@Test
 	public void testHappyPathConnect() {
-		
+
 		// data setup
 		PublicServerInfo pubInfo = new PublicServerInfo();
 		pubInfo.setId(String.valueOf(rand.nextInt()));
-		
+
 		// mock setup
 		when(apiService.getPublicServerInfo(any(String.class))).thenReturn(pubInfo);
-		
+
 		// connect
 		PublicServerInfo returnedPublicInfo = loginService.connect(validHost);
-		
+
 		assertPublicServerInfo(pubInfo, returnedPublicInfo);
 	}
-	
+
 	@Test
 	public void testSingleUser_NoPassword() throws Exception {
-		
+
 		// data setup
 		AuthenticationResult authResult = new AuthenticationResult();
 		authResult.setAccessToken(String.valueOf(rand.nextInt()));
@@ -89,15 +97,20 @@ public class LoginServiceTests {
 		ArrayList userList = new ArrayList();
 		userList.add(user);
 		users.setItems(userList);
-		
+
 		// mock setup
 		when(apiService.login(any(String.class), any(String.class))).thenReturn(authResult);
 		// connect
 		String returnUrl = loginService.login(users);
 		Assert.assertTrue(UrlConstants.homeUrl.equals(returnUrl));
 	}
-	
-	
+
+	@Test(expected = ConfigNotFoundException.class)
+	public void testNoConfigs() throws ConnectionException, ConfigNotFoundException {
+		doThrow(ConfigNotFoundException.class).when(aggregatorService).login();
+		loginService.login();
+	}
+
 	private void assertPublicServerInfo(PublicServerInfo expected, PublicServerInfo actual) {
 		Assert.assertTrue(expected.getId().equals(actual.getId()));
 	}

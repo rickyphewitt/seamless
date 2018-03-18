@@ -4,6 +4,7 @@ import com.rickyphewitt.seamless.data.Album;
 import com.rickyphewitt.seamless.data.Artist;
 import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.data.enums.IdSource;
+import com.rickyphewitt.seamless.data.exceptions.ConfigNotFoundException;
 import com.rickyphewitt.seamless.data.exceptions.ConnectionException;
 import com.rickyphewitt.seamless.data.sources.WebApiSource;
 import com.rickyphewitt.seamless.services.config.CachingConfig;
@@ -43,8 +44,15 @@ public class Aggregator {
 	 * 
 	 * @throws ConnectionException
 	 */
-	public void login() throws ConnectionException {
+	public void login() throws ConnectionException, ConfigNotFoundException {
+		logger.info("Loading Sources");
 		sourceConfigService.loadSources();
+
+		if(sourceConfigService.getWebSources() == null || sourceConfigService.getWebSources().isEmpty()) {
+			String message = "No sources found";
+			logger.info(message);
+			throw new ConfigNotFoundException(message);
+		}
 		logger.info("Attempting to log into sources");
 		sources = new ArrayList<AsyncSourceService>();
 		for(IdSource source: sourceConfigService.getWebSources().keySet()) {
