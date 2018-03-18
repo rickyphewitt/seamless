@@ -26,6 +26,7 @@ public class FragmentService {
 		fragments.put(FragmentConstants.FRAGMENT_SETTINGS, FragmentConstants.FRAGMENT_SETTINGS);
 		fragments.put(FragmentConstants.FRAGMENT_PLAY_QUEUE, FragmentConstants.FRAGMENT_PLAY_QUEUE);
 		fragments.put(FragmentConstants.FRAGMENT_ADD_SOURCE, FragmentConstants.FRAGMENT_ADD_SOURCE);
+		fragments.put(FragmentConstants.FRAGMENT_FIRST_RUN_SOURCES, FragmentConstants.FRAGMENT_FIRST_RUN_SOURCES);
 	}
 
 	
