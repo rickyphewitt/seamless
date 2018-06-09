@@ -4,97 +4,64 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rickyphewitt.seamless.data.enums.IdSource;
 import com.rickyphewitt.seamless.data.exceptions.ConfigException;
+import com.rickyphewitt.seamless.data.exceptions.ConfigNotFoundException;
 import com.rickyphewitt.seamless.data.sources.WebApiSource;
-import com.rickyphewitt.seamless.services.SourceConfigService;
+import com.rickyphewitt.seamless.services.FileService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import test.com.rickyphewitt.seamless.services.config.TestConfig;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Random;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
-public class SourceConfigServiceTests {
+public class FileServiceTests {
 
 	private static Random random = new Random();
 
-	@Autowired
-	SourceConfigService sourceConfigService;
-
-	private static File directory = new File(System.getProperty("user.home") + "/.seamless/sources");
+	private static File directory = new File("tmp");
 
 	@After
 	public void before() {
-		deleteDir(SourceConfigServiceTests.directory);
-		//Assert.assertTrue(deleteDir(SourceConfigServiceTests.directory));
-		//reset web api sources
-		sourceConfigService.setWebSources(null);
+		deleteDir(FileServiceTests.directory);
 	}
 
 
-	@Test
-	public void unableToLoadConfigFile_noFilesFound() throws Exception{
-		// data setup
-		// none, no config files to build
-		// run code
-		sourceConfigService.loadSources();
-
-		Assert.assertNull(sourceConfigService.getWebSources());
+	@Test(expected = FileNotFoundException.class)
+	public void noFileFound() throws Exception{
+		File f = FileService.read(directory + "/anyFileName.txt");
 
 	}
 
 	@Test
-	public void successfullyLoadConfigFile_oneFileFound() throws Exception{
+	public void fileFound() throws Exception{
 		// data setup
 		WebApiSource source = this.generateTestWebApiSource();
 		this.writeWebSourceApiConfig(source);
 
 		// run code
-		sourceConfigService.loadSources();
-
-		WebApiSource loadedSource = sourceConfigService.getWebSources().get(IdSource.EMBY).get(0);
-		this.assertWebApiSource(source, loadedSource);
-
+		File f = FileService.read(directory + "/"+ source.getConfigFileName());
+		Assert.assertNotNull(f);
 	}
 
 	@Test
-	@Ignore("Flaky Test")
-	public void successfullyLoadConfigFile_multipleFilesFound() throws Exception{
+	public void writeFile() throws IOException, ConfigException {
 		// data setup
 		WebApiSource source = this.generateTestWebApiSource();
-		Thread.sleep(3000); // sleep 2 second as file names are by the second
-		WebApiSource source2 = this.generateTestWebApiSource();
-		this.writeWebSourceApiConfig(source);
-		this.writeWebSourceApiConfig(source2);
 
-		// run code
-		sourceConfigService.loadSources();
-		Assert.assertTrue(sourceConfigService.getWebSources() != null);
-		Assert.assertTrue(sourceConfigService.getWebSources().containsKey(IdSource.EMBY));
-		Assert.assertTrue(sourceConfigService.getWebSources().get(IdSource.EMBY).size() == 2);
-	}
+		// write file
+		FileService.write(WebApiSource.class, source, directory + "/"+ source.getConfigFileName());
 
-	@Test
-	public void writeSource() throws ConfigException {
-		WebApiSource source = this.generateTestWebApiSource();
-		sourceConfigService.writeSource(source);
+		// read
+		File f = FileService.read(directory + "/"+ source.getConfigFileName());
+		Assert.assertNotNull(f);
 
-		// run code
-		sourceConfigService.loadSources();
-		Assert.assertTrue(sourceConfigService.getWebSources() != null);
-		Assert.assertTrue(sourceConfigService.getWebSources().containsKey(IdSource.EMBY));
-		Assert.assertTrue(sourceConfigService.getWebSources().get(IdSource.EMBY).size() == 1);
 	}
 
 	// test helpers
@@ -103,7 +70,7 @@ public class SourceConfigServiceTests {
 		this.createDirIfDoesNotExist();
 
 		try {
-			writer = new PrintWriter(SourceConfigServiceTests.directory + "/" + webSource.getConfigFileName(), "UTF-8");
+			writer = new PrintWriter(FileServiceTests.directory + "/" + webSource.getConfigFileName(), "UTF-8");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			Assert.assertTrue(false);
@@ -117,8 +84,8 @@ public class SourceConfigServiceTests {
 	}
 
 	private void createDirIfDoesNotExist() {
-		if (!SourceConfigServiceTests.directory.exists()) {
-			SourceConfigServiceTests.directory.mkdirs();
+		if (!FileServiceTests.directory.exists()) {
+			FileServiceTests.directory.mkdirs();
 		}
 	}
 

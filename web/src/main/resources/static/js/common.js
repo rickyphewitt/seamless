@@ -118,6 +118,7 @@ var appGroupPlay = idAttrKey + "GroupPlay";
 var appGroupShuffle = idAttrKey + "GroupShuffle";
 var appGroupMix = idAttrKey + "GroupMix";
 var appSettingsForm = idAttrKey + "SettingsForm";
+var appSourcesForm = idAttrKey + "SourcesForm";
 // css classes
 var nowPlayingQueueItemClass = "nowPlayingQueueItem";
 var nowPlayingQueueSongClass = classAttrKey + "PlaySong";

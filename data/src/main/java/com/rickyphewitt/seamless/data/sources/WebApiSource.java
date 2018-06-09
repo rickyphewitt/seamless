@@ -1,7 +1,5 @@
 package com.rickyphewitt.seamless.data.sources;
 
-import org.springframework.stereotype.Component;
-
 import com.rickyphewitt.seamless.data.enums.IdSource;
 
 public class WebApiSource extends BaseMediaSource {
@@ -10,7 +8,8 @@ public class WebApiSource extends BaseMediaSource {
 	private String password;
 	private String url;
 	private int maxRetryAttempts;
-	
+
+	public WebApiSource() {};
 	public WebApiSource(String name, IdSource source) {
 		super(name, source);
 	}

@@ -65,11 +65,17 @@ public class SettingsController {
 	}
 
 	@ModelAttribute("sources")
-	public List<WebApiSource> getSournces() {
+	public List<WebApiSource> getSources() {
 		List<WebApiSource> sources = new ArrayList();
-		for(IdSource source: this.sourceConfigService.getWebSources().keySet()) {
-			sources.addAll(this.sourceConfigService.getWebSources().get(source));
+
+		// load existing sources if any exist
+		if(this.sourceConfigService.getWebSources() != null && this.sourceConfigService.getWebSources().size() > 0){
+			for(IdSource source: this.sourceConfigService.getWebSources().keySet()) {
+				sources.addAll(this.sourceConfigService.getWebSources().get(source));
+			}
 		}
+
+
 		return sources;
 	}
 }

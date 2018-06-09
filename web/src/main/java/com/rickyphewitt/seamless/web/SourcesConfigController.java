@@ -45,11 +45,11 @@ public class SourcesConfigController {
 		if(bindingResult.hasErrors()) {
 			return simpleErrorService.error(bindingResult.getAllErrors().get(0).getDefaultMessage());
 		} else {
-			/*try {
-				settingsService.writeConfig(config);
+			try {
+				sourceConfigService.writeSource(webApiSource);
 			} catch (ConfigException e) {
 				return simpleErrorService.error(e.getMessage());
-			}*/
+			}
 		}
 		return simpleErrorService.success();
 

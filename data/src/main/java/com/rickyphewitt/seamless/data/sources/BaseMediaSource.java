@@ -41,6 +41,9 @@ public abstract class BaseMediaSource {
 	}
 
 	public String getConfigFileName() {
+		if(this.configFileName == null) {
+			this.configFileName = generateConfigFileName();
+		}
 		return configFileName;
 	}
 
@@ -60,6 +63,11 @@ public abstract class BaseMediaSource {
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return sdf.format(timestamp);
+	}
+
+	private String generateConfigFileName() {
+		return this.source.name() + "." + this.generateTimestamp();
+
 	}
 
 }

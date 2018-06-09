@@ -15,9 +15,16 @@ Seamless aims to blend all sources of music into a single interface
 * See Dev for now
 
 # Dev
-* Download and build Emby Api Java jar from https://github.com/rickyphewitt/embyClientJava
-  * Run ``` mvn clean install ``` inside that repo
-* Update the EMBY.2018.01.21.07.38.56 config in build/sources with user/pass/server info
+### Required Libraries
+* maven
+* Java 8 (Openjdk)
+### Build Project
+* Run ``` make clean build ``` inside that repo
+* If you are on 18.04 and run into an https issue, you can fix it by following the instructins here: https://gist.github.com/mikaelhg/527204e746984cf9a33f7910bb8b4cb6
+
+### Update Config
+* Update/Create the EMBY.2018.01.21.07.38.56 config in build/sources with user/pass/server info
+### Run Project
 * Build/run project
 ``` make run_with_config ```
 * Open http://localhost:8080 

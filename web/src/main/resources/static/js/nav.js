@@ -126,10 +126,10 @@ function goToSettings() {
 }
 
 function saveSettings() {
-    ajaxFormPost(appSettingsForm);
+    ajaxFormPost(appSettingsForm, undefined);
 }
 
-function ajaxFormPost(postHandle) {
+function ajaxFormPost(postHandle, onSuccess) {
     var $form = $(postHandle);
     $form.on('submit', function(e) {
         resetFormMessages();
@@ -146,7 +146,12 @@ function ajaxFormPost(postHandle) {
                 } else {
                     $(successDiv).fadeIn('slow', function(){
                         $(successDiv).text(SUCCESS);
+                         if(onSuccess != undefined) {
+                                    onSuccess();
+                        }
                     });
+
+
 
                 }
             }
@@ -174,11 +179,17 @@ function resetFormMessages() {
 
 }
 
-
+function reloadToHome() {
+    window.location.href = "/"
+}
 // add source nav
+function saveSource() {
+    ajaxFormPost(appSettingsForm, reloadToHome);
+}
 function addSource() {
     $(mainContent).load(apiV1 + sourcesUrl, function(){
         setMainHeading(SETTINGS_TEXT);
+        saveSource();
     });
 }
 

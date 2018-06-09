@@ -1,0 +1,10 @@
+{
+  "version": "1",
+  "username": "ricky",
+  "password": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+  "url": "http://slimsky:8096",
+  "maxRetryAttempts": 99,
+  "name": "EqQwlY9Se8",
+  "source": "EMBY",
+  "configFileName": "EMBY.2018.01.21.07.38.56"
+}

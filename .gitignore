@@ -1,7 +1,6 @@
 target/
 test-results/
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
 logs/*
 */logs/
@@ -21,11 +20,3 @@ embyApiClient
 *.iml
 *.ipr
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-/bin/

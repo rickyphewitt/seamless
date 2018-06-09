@@ -3,6 +3,7 @@ package com.rickyphewitt.seamless.services;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rickyphewitt.seamless.data.enums.IdSource;
+import com.rickyphewitt.seamless.data.exceptions.ConfigException;
 import com.rickyphewitt.seamless.data.sources.WebApiSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,8 +29,11 @@ public class SourceConfigService {
 	// Attributes
 	private HashMap<IdSource, List<WebApiSource>> webSources;
 	private static Logger logger = LogManager.getLogger();
+	private String configDir;
 
-	// Private methods
+	public SourceConfigService() {
+		this.configDir = System.getProperty("user.home") + "/";
+	}
 
 	/**
 	 * Loads all configs from source folder
@@ -40,7 +44,7 @@ public class SourceConfigService {
 		List<Path> fileNames = new ArrayList<>();
 
 		this.makeConfigDirIfRequired();
-		try (Stream<Path> paths = Files.walk(Paths.get(System.getProperty("user.home") + "/" + this.sourceConfigDirectory))) {
+		try (Stream<Path> paths = Files.walk(Paths.get( this.configDir + this.sourceConfigDirectory))) {
 			paths
 					.filter(Files::isRegularFile)
 					.forEach(s -> fileNames.add(s.getFileName()));
@@ -57,6 +61,10 @@ public class SourceConfigService {
 		sortSources(sources);
 	}
 
+	public void writeSource(WebApiSource source) throws ConfigException {
+		FileService.write(WebApiSource.class, source, this.configDir + this.sourceConfigDirectory +"/"+ source.getConfigFileName());
+
+	}
 	
 	// Getters/Setters
 	public HashMap<IdSource, List<WebApiSource>> getWebSources() {
