@@ -82,7 +82,26 @@ public class Aggregator {
 		
 		return artists;
 	}
-	
+
+	@Cacheable(value = CachingConfig.ALBUM_CACHE, unless ="#result.size() == 0")
+	public List<Album> getAlbums() throws InterruptedException, ExecutionException {
+		logger.info("Cache Miss! Requesting Albums from services");
+		ArrayList<Album> albums = new ArrayList<Album>();
+
+		List<CompletableFuture<List<Album>>> completableFutures = new ArrayList<CompletableFuture<List<Album>>>();
+		for(AsyncSourceService source: this.sources) {
+			completableFutures.add(source.getAsyncAlbums());
+		}
+
+		CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
+
+		for(CompletableFuture<List<Album>> completeFuture: completableFutures) {
+			albums.addAll(completeFuture.get());
+		}
+		return albums;
+	}
+
+
 	@Cacheable(value = CachingConfig.ALBUM_CACHE, unless ="#result.size() == 0")
 	public List<Album> getAlbumsByArtist(String artistId) throws InterruptedException, ExecutionException {
 		logger.info("Cache Miss! Requesting Albums from services");

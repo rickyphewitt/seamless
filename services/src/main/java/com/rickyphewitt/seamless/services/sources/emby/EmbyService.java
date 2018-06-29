@@ -83,6 +83,12 @@ public class EmbyService implements SourceService, AsyncSourceService {
 
 	@Override
 	@Retryable(maxAttempts = defaultMaxAttempts)
+	public List<Album> getAlbums() {
+		return EmbyDeserializer.deserialize(apiClient.getAlbums());
+	}
+
+	@Override
+	@Retryable(maxAttempts = defaultMaxAttempts)
 	public List<Song> getSongsInAlbum(String albumSourceId) {
 		return EmbyDeserializer.deserialize(apiClient.getAlbumSongs(albumSourceId));
 	}
@@ -141,6 +147,12 @@ public class EmbyService implements SourceService, AsyncSourceService {
 	@Override
 	public CompletableFuture<List<Album>> getAsyncAlbumsByArtist(String artistSourceId) {
 		List<Album> albums = this.getAlbumsByArtist(artistSourceId);
+		return CompletableFuture.completedFuture(albums);
+	}
+
+	@Override
+	public CompletableFuture<List<Album>> getAsyncAlbums() {
+		List<Album> albums = this.getAlbums();
 		return CompletableFuture.completedFuture(albums);
 	}
 

@@ -10,9 +10,12 @@ import com.rickyphewitt.seamless.data.Album;
 import com.rickyphewitt.seamless.data.Artist;
 import com.rickyphewitt.seamless.data.Song;
 import com.rickyphewitt.seamless.data.enums.IdSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EmbyDeserializer {
 
+	private static Logger logger = LogManager.getLogger();
 
 	public static List<Artist> deserialize(ArtistSet embyArtists) {
 		ArrayList<Artist> artists = new ArrayList<Artist>();
@@ -48,15 +51,21 @@ public class EmbyDeserializer {
 	}
 	
 	public static Album deserialize(com.rickyphewitt.emby.api.data.Album embyAlbum) {
-		Album commonArtist = new Album();
+		Album commonAlbum = new Album();
+
+		logger.info("Artists!" +embyAlbum.getAlbumArtists());
+
+		commonAlbum.setMediaId(embyAlbum.getId());
+		commonAlbum.setMediaIdSource(IdSource.EMBY);
+		commonAlbum.setName(embyAlbum.getName());
+		commonAlbum.setDuration(embyAlbum.getRunTimeTicks().toString());
+		commonAlbum.setPrimaryImage(embyAlbum.getPrimaryImage());
+		if(embyAlbum.getAlbumArtists() != null && embyAlbum.getAlbumArtists().size() > 0) {
+			commonAlbum.setArtistId(embyAlbum.getAlbumArtists().get(0).getId());
+		}
+
 		
-		commonArtist.setMediaId(embyAlbum.getId());
-		commonArtist.setMediaIdSource(IdSource.EMBY);
-		commonArtist.setName(embyAlbum.getName());
-		commonArtist.setDuration(embyAlbum.getRunTimeTicks().toString());
-		commonArtist.setPrimaryImage(embyAlbum.getPrimaryImage());
-		
-		return commonArtist;
+		return commonAlbum;
 		
 	}
 	

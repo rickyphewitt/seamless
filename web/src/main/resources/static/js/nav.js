@@ -58,6 +58,27 @@ function goToArtist(artist) {
 
 
 }
+
+function goToAlbums() {
+    $(mainContent).load(albumsUrl, function() {
+        setMainHeading(ALBUMS_TEXT);
+
+		 // open album
+		 $(album).click(function() {
+			 goToAlbum($(this));
+		  });
+
+		  //load image
+		  $(album).each(function(index, value){
+		    console.log($(value));
+		    getPrimaryImage($(value).attr(entityId), $(value).attr(primaryImage));
+
+		  })
+	});
+
+
+}
+
 /* Album Nav */
 function goToAlbum(album) {
 	//console.log('AlbumId: ' + albumIdAttr);
@@ -179,8 +200,12 @@ function resetFormMessages() {
 
 }
 
+function reloadTo(location) {
+    window.location.href = location;
+}
+
 function reloadToHome() {
-    window.location.href = "/"
+    reloadTo("/");
 }
 // add source nav
 function saveSource() {
@@ -221,9 +246,28 @@ $(function() {
         filterArtists($(this).val());
 	});
 
+    // onclicks events for settings sidebar
+    $(artistNavMenu).click(function(){
+        toggleMenu();
+    });
+
+    // go to albums
+    $(albumNavMenu).click(function(){
+        goToAlbums();
+    });
+
     // opens settings
     $(settingsNav).click(function() {
         goToSettings();
     });
+
+    // if first run page add custom JS nav
+    if(window.location.pathname == "/firstRun") {
+        $(addSourceClass).each(function() {
+            $(this).click(function(){
+                addSource();
+            });
+         });
+    }
 
 });

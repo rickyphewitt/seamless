@@ -4,7 +4,7 @@
 <div th:fragment="firstRunSources" id="appContentContent" class="contentContent clearLeft">
 	<div id="firstRunSources" class="verticleOverflow">
 		<th:block th:each="source : ${supportedSources}">
-			<div class="albumContainer smallPadding floatLeft">
+			<div class="albumContainer smallPadding floatLeft appAddSource">
 				<div class="appAlbum album albumBorderBg" data-th-attr="entityId=${source.configName}">
 					<div th:id="${source.configName}" class="albumCover albumDefaultBg">
 						<img class="albumCover" th:src="${source.image}" src="/images/no_album_200.png" /></div>

@@ -1,6 +1,6 @@
 .PHONY: build
 defauls: build run
-embyApiClientRepoHash = 1ffd2683b805bb22abff2daa3bbe07e769c805de
+embyApiClientRepoHash = aa109525928b62f1e0ba46ac07dcffdfcce50a50
 	
 build:
 	mvn clean install

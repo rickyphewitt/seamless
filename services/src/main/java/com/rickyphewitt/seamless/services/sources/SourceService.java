@@ -15,6 +15,7 @@ public interface SourceService {
 	boolean isConnected();
 	List<Artist> getArtists() throws Exception;
 	List<Album> getAlbumsByArtist(String artistSourceId) throws Exception;
+	List<Album> getAlbums() throws Exception;
 	List<Song> getSongsInAlbum(String albumSourceId) throws Exception;
 	byte[] playSong(String songSourceId);
 	String getPrimaryImage(String itemSourceId, String primaryImageId);

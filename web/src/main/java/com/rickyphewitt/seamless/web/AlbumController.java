@@ -2,6 +2,9 @@ package com.rickyphewitt.seamless.web;
 
 import java.util.concurrent.ExecutionException;
 
+import com.rickyphewitt.seamless.data.Artist;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import com.rickyphewitt.seamless.services.SongService;
 
 @Controller
 public class AlbumController {
+
+	private static Logger logger = LogManager.getLogger();
 
 	@Autowired
 	ArtistService artistService;
@@ -34,8 +39,9 @@ public class AlbumController {
 	FragmentService fragmentService;
 	
 	@RequestMapping("/albums")
-	public String albums(Model model) {
-		
+	public String albums(Model model) throws ExecutionException, InterruptedException {
+		albumService.loadAlbums();
+		model.addAttribute("albums", albumService.getAlbums());
 		return fragmentService.getFragment("albums");
 	}
 	
@@ -43,7 +49,12 @@ public class AlbumController {
 	public String album(@PathVariable("id") String id, Model model) throws InterruptedException, ExecutionException {
 		albumService.setCurrentAlbumId(id);
 		Album album = albumService.getAlbumsMap().get(id);
+		String artistId = album.getArtistId() != null ? album.getArtistId() : "UNKNOWN";
+		logger.info(artistId);
+
+		artistService.setCurrentArtistId(artistId);
 		songService.loadSongs(id);
+		logger.info("Artist Songsky: " + artistService.getArtistsMap().get(artistService.getCurrentArtistId()));
 		model.addAttribute("artist", artistService.getArtistsMap().get(artistService.getCurrentArtistId()));
 		model.addAttribute("album", album);
 		model.addAttribute("songs", songService.getSongs());

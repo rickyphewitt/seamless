@@ -10,6 +10,7 @@ var IMAGE_LOCATION = "images/";
 var PLAY_IMG = IMAGE_LOCATION + "playLight.png";
 var PAUSE_IMG = IMAGE_LOCATION + "pauseLight.png";
 var SUCCESS = "Success";
+var ALBUMS_TEXT = "Albums";
 
 // key prepended to all functional vs stylistic classes
 var attrKey = "app";
@@ -52,10 +53,13 @@ var hamNav = idAttrKey + "HamNav";
 var navContentList = classAttrKey + "ContentList";
 var navMenuList = classAttrKey + "MenuList";
 var settingsNav = idAttrKey + "Settings";
+var artistNavMenu = idAttrKey + "MenuArtists";
+var albumNavMenu = idAttrKey + "MenuAlbums";
 var artistNavMenuItem = classAttrKey + "ArtistNav";
 var album = classAttrKey + "Album";
 var search = idAttrKey + "Search";
 var addSourceId = idAttrKey + "AddSource";
+var addSourceClass = classAttrKey + "AddSource";
 
 
 //attributes

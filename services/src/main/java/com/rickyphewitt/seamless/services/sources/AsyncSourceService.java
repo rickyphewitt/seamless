@@ -15,6 +15,8 @@ public interface AsyncSourceService {
 	@Async
 	CompletableFuture<List<Album>> getAsyncAlbumsByArtist(String artistSourceId);
 	@Async
+	CompletableFuture<List<Album>> getAsyncAlbums();
+	@Async
 	CompletableFuture<List<Song>> getAsyncSongsInAlbum(String albumSourceId);
 	@Async
 	CompletableFuture<byte[]> playAsyncSong(String songSourceId);
