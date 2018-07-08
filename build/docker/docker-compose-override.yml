@@ -1,0 +1,11 @@
+version: '3'
+services:
+  seamless:
+    environment:
+      - HOME_USER=/home/app_user
+    build: .
+    image: seamless:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      -  ../sources:/home/app_user/.seamless/sources
