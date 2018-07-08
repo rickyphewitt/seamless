@@ -24,3 +24,15 @@ build_dependencies: pull_dependencies
 
 pull_dependencies:
 	rm -fr embyApiClient && git clone https://github.com/rickyphewitt/embyClientJava.git embyApiClient
+
+docker_build: clean_build
+	docker build --no-cache -t seamless -f build/docker/Dockerfile .
+
+docker_compose_run: docker_build
+	docker-compose -f build/docker/docker-compose.yml up
+
+docker_compose_run_with_config: docker_build
+	docker-compose -f build/docker/docker-compose-override.yml up
+
+docker_compose_run_with_config_detach: docker_build
+    docker-compose -f build/docker/docker-compose-override.yml up -d
