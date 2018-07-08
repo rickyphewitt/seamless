@@ -1,0 +1,7 @@
+version: '3'
+services:
+  seamless:
+    build: .
+    image: seamless:latest
+    ports:
+      - "8080:8080"
